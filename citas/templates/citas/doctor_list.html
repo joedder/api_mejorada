@@ -24,10 +24,10 @@
     <a class="button button-primary" href="{% url 'doctors_create' %}">Create Doctor</a>
 </section>
 
-<div class="doctor-list">
+<div class="panel-list">
     {% for doctor in doctors %}
-        <article class="doctor-card">
-            <div class="doctor-info">
+        <article class="panel-card">
+            <div class="panel-info">
                 <h2>{{ doctor.first_name }} {{ doctor.first_lastname }}</h2>
                 <p>ID: {{ doctor.id }}</p>
                 <p>Second Name: {{ doctor.second_name }}</p>

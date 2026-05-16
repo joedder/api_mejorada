@@ -1,8 +1,10 @@
+.panel-list,
 .doctor-list {
     display: grid;
     gap: 1.25rem;
 }
 
+.panel-card,
 .doctor-card {
     background-color: var(--surface);
     border: 1px solid var(--border);
@@ -10,16 +12,19 @@
     padding: 1.5rem;
 }
 
+.panel-card h2,
 .doctor-card h2 {
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
 
+.panel-card p,
 .doctor-card p {
     margin: 0.55rem 0;
     color: var(--muted);
 }
 
+.panel-info,
 .doctor-info {
     display: grid;
     gap: 0.75rem;
@@ -32,17 +37,20 @@
     gap: 0.75rem;
 }
 
+.panel-form,
 .doctor-form {
     display: grid;
     gap: 1.25rem;
     max-width: 640px;
 }
 
+.panel-form .form-field,
 .doctor-form .form-field {
     display: grid;
     gap: 0.5rem;
 }
 
+.form-label,
 .doctor-label {
     font-weight: 600;
 }
