@@ -1,33 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Doctor Index</title>
-</head>
-<body>
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Doctor Index{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
     <h1>Doctors</h1>
+    <a class="button button-primary" href="{% url 'doctors_create' %}">Create Doctor</a>
+</section>
 
-    <a href="{% url 'doctors_create' %}">Create Doctor</a>
-
+<div class="doctor-list">
     {% for doctor in doctors %}
-        <div>
-            <h2>{{ doctor.first_name }} {{ doctor.first_lastname }}</h2>
-            <p>ID: {{ doctor.id }}</p>
-            <p>Second Name: {{ doctor.second_name }}</p>
-            <p>Second Last Name: {{ doctor.second_lastname }}</p>
-            <p>Identity ID: {{ doctor.identity_id }}</p>
-            <p>Gender: {{ doctor.gender }}</p>
-            <p>Phone Number: {{ doctor.phone_number }}</p>
-            <p>Specialty: {{ doctor.specialty }}</p>
-            <div>
-                <a href="{% url 'doctors_update' doctor.id %}">Update</a>
-                <a href="{% url 'doctors_disable' doctor.id %}">Disable</a>
-                <a href="{% url 'doctors_delete' doctor.id %}">Delete</a>
+        <article class="doctor-card">
+            <div class="doctor-info">
+                <h2>{{ doctor.first_name }} {{ doctor.first_lastname }}</h2>
+                <p>ID: {{ doctor.id }}</p>
+                <p>Second Name: {{ doctor.second_name }}</p>
+                <p>Second Last Name: {{ doctor.second_lastname }}</p>
+                <p>Identity ID: {{ doctor.identity_id }}</p>
+                <p>Gender: {{ doctor.gender|yesno:"Male,Female" }}</p>
+                <p>Phone Number: {{ doctor.phone_number }}</p>
+                <p>Specialty: {{ doctor.specialty }}</p>
             </div>
-        </div>
+            <div class="card-actions">
+                <a class="button button-secondary" href="{% url 'doctors_update' doctor.id %}">Update</a>
+                <a class="button button-secondary" href="{% url 'doctors_disable' doctor.id %}">Disable</a>
+                <a class="button button-secondary" href="{% url 'doctors_delete' doctor.id %}">Delete</a>
+            </div>
+        </article>
     {% empty %}
-        <p>No doctors registered</p>
+        <p class="empty-message">No doctors registered</p>
     {% endfor %}
+</div>
 
+<div class="pagination">
     {% if doctors.has_previous %}
         <a href="?page=1">First</a>
         <a href="?page={{ doctors.previous_page_number }}">Previous</a>
@@ -39,5 +60,5 @@
         <a href="?page={{ doctors.next_page_number }}">Next</a>
         <a href="?page={{ doctors.paginator.num_pages }}">Last</a>
     {% endif %}
-</body>
-</html>
+</div>
+{% endblock %}
