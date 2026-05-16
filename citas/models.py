@@ -4,43 +4,33 @@ from django.utils import timezone
 
 
 # =============================================================================
-# ABSTRACT: SOFT DELETE
+# ABSTRACTO: BORRADO LÓGICO
 # =============================================================================
 
 class SoftDeleteManager(models.Manager):
-    """Manager por defecto: retorna solo registros no eliminados."""
 
     def get_queryset(self):
         return super().get_queryset().filter(deleted_at__isnull=True)
 
 
 class SoftDeleteModel(models.Model):
-    """
-    Clase abstracta que provee funcionalidad de soft delete.
-    Todos los modelos que hereden de esta clase soportarán
-    eliminación lógica (soft delete) y física (hard delete).
-    """
+
     deleted_at = models.DateTimeField(null=True, blank=True, default=None)
 
-    # Manager por defecto (solo registros activos)
     objects = SoftDeleteManager()
-    # Manager que incluye registros eliminados
     all_objects = models.Manager()
 
     class Meta:
         abstract = True
 
     def soft_delete(self):
-        """Marca el registro como eliminado sin borrarlo de la base de datos."""
         self.deleted_at = timezone.now()
         self.save(update_fields=['deleted_at'])
 
     def hard_delete(self):
-        """Elimina el registro de forma permanente de la base de datos."""
         super().delete()
 
     def restore(self):
-        """Restaura un registro eliminado lógicamente."""
         self.deleted_at = None
         self.save(update_fields=['deleted_at'])
 
@@ -50,18 +40,19 @@ class SoftDeleteModel(models.Model):
 
 
 # =============================================================================
-# CUSTOM USER MODEL
+# MODELO DE USUARIO PERSONALIZADO
 # =============================================================================
 
 class UserManager(BaseUserManager):
-    """Manager personalizado para el modelo User."""
 
     def create_user(self, username, email, password=None, **extra_fields):
+
         if not username:
             raise ValueError('El campo username es obligatorio.')
         if not email:
             raise ValueError('El campo email es obligatorio.')
         email = self.normalize_email(email)
+
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -74,10 +65,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """
-    Modelo de usuario personalizado para autenticación del sistema.
-    Reemplaza el modelo User por defecto de Django.
-    """
     name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
@@ -105,7 +92,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 # =============================================================================
 
 class TypeAppointment(SoftDeleteModel):
-    """Tipos de cita médica (ej: consulta, seguimiento, urgencia)."""
     name = models.CharField(max_length=250)
     description = models.TextField(null=True, blank=True)
 
@@ -119,7 +105,6 @@ class TypeAppointment(SoftDeleteModel):
 
 
 class PriorityAppointment(SoftDeleteModel):
-    """Niveles de prioridad para citas médicas (ej: urgente, normal, baja)."""
     name = models.CharField(max_length=250)
     description = models.TextField(null=True, blank=True)
 
@@ -133,7 +118,6 @@ class PriorityAppointment(SoftDeleteModel):
 
 
 class CategoryMedicalRecord(SoftDeleteModel):
-    """Categorías para registros médicos (ej: laboratorio, imágenes, diagnóstico)."""
     name = models.CharField(max_length=250)
     description = models.TextField(null=True, blank=True)
 
@@ -151,7 +135,6 @@ class CategoryMedicalRecord(SoftDeleteModel):
 # =============================================================================
 
 class Doctor(SoftDeleteModel):
-    """Doctor médico registrado en el sistema."""
     first_name = models.CharField(max_length=50)
     second_name = models.CharField(max_length=50, null=True, blank=True)
     first_lastname = models.CharField(max_length=100)
@@ -171,11 +154,7 @@ class Doctor(SoftDeleteModel):
 
 
 class PatientRecord(SoftDeleteModel):
-    """
-    Expediente clínico del paciente.
-    Se crea al registrar al paciente por primera vez.
-    Referencia al paciente mediante FK.
-    """
+
     entry_date = models.DateField()
     id_patient = models.ForeignKey(
         'Patient',
@@ -194,16 +173,6 @@ class PatientRecord(SoftDeleteModel):
 
 
 class Patient(SoftDeleteModel):
-    """
-    Paciente registrado en el sistema.
-
-    Nota: id_patient_record es una referencia circular intencional hacia
-    PatientRecord. Se define como nullable para permitir la creación del
-    paciente antes de su expediente. El flujo correcto es:
-      1. Crear Patient (sin id_patient_record)
-      2. Crear PatientRecord con FK al Patient
-      3. Actualizar Patient.id_patient_record con el registro creado
-    """
     first_name = models.CharField(max_length=50)
     second_name = models.CharField(max_length=50, null=True, blank=True)
     first_lastname = models.CharField(max_length=100)
@@ -218,7 +187,7 @@ class Patient(SoftDeleteModel):
     name_emergency_contact = models.CharField(max_length=100, null=True, blank=True)
     last_name_emergency_contact = models.CharField(max_length=100, null=True, blank=True)
     phone_number_emergency_contact = models.CharField(max_length=15, null=True, blank=True)
-    # Referencia circular intencional — ver docstring
+
     id_patient_record = models.ForeignKey(
         PatientRecord,
         on_delete=models.SET_NULL,
@@ -238,7 +207,6 @@ class Patient(SoftDeleteModel):
 
 
 class MedicalAppointment(SoftDeleteModel):
-    """Cita médica programada entre un doctor y un paciente."""
     id_doctor = models.ForeignKey(
         Doctor,
         on_delete=models.PROTECT,
@@ -281,7 +249,6 @@ class MedicalAppointment(SoftDeleteModel):
 
 
 class MedicalRecord(SoftDeleteModel):
-    """Registro médico individual vinculado al expediente de un paciente."""
     category = models.ForeignKey(
         CategoryMedicalRecord,
         on_delete=models.PROTECT,
