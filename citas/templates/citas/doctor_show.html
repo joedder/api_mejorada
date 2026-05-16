@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Detail</title>
+</head>
+<body>
+    <h1>Doctor Detail</h1>
+
+    {% if editing %}
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                <label>First Name</label><br>
+                <input type="text" name="first_name" maxlength="50" required value="{{ doctor.first_name }}">
+            </p>
+            <p>
+                <label>Second Name</label><br>
+                <input type="text" name="second_name" maxlength="50" value="{{ doctor.second_name }}">
+            </p>
+            <p>
+                <label>Last Name</label><br>
+                <input type="text" name="first_lastname" maxlength="100" required value="{{ doctor.first_lastname }}">
+            </p>
+            <p>
+                <label>Second Last Name</label><br>
+                <input type="text" name="second_lastname" maxlength="100" value="{{ doctor.second_lastname }}">
+            </p>
+            <p>
+                <label>Identity ID</label><br>
+                <input type="text" name="identity_id" maxlength="15" required value="{{ doctor.identity_id }}">
+            </p>
+            <p>
+                <label>Gender</label><br>
+                <select name="gender" required>
+                    <option value="True" {% if doctor.gender %}selected{% endif %}>Male</option>
+                    <option value="False" {% if not doctor.gender %}selected{% endif %}>Female</option>
+                </select>
+            </p>
+            <p>
+                <label>Phone Number</label><br>
+                <input type="text" name="phone_number" maxlength="15" required value="{{ doctor.phone_number }}">
+            </p>
+            <p>
+                <label>Specialty</label><br>
+                <input type="text" name="specialty" required value="{{ doctor.specialty }}">
+            </p>
+            <button type="submit">Save</button>
+        </form>
+    {% else %}
+        <p>ID: {{ doctor.id }}</p>
+        <p>First Name: {{ doctor.first_name }}</p>
+        <p>Second Name: {{ doctor.second_name }}</p>
+        <p>Last Name: {{ doctor.first_lastname }}</p>
+        <p>Second Last Name: {{ doctor.second_lastname }}</p>
+        <p>Identity ID: {{ doctor.identity_id }}</p>
+        <p>Gender: {{ doctor.gender }}</p>
+        <p>Phone Number: {{ doctor.phone_number }}</p>
+        <p>Specialty: {{ doctor.specialty }}</p>
+        <a href="{% url 'doctors_update' doctor.id %}">Edit</a>
+    {% endif %}
+
+    <p><a href="{% url 'doctor' %}">Back to Doctors</a></p>
+</body>
+</html>

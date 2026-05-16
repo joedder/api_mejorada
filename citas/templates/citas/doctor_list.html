@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Index</title>
+</head>
+<body>
+    <h1>Doctors</h1>
+
+    <a href="{% url 'doctors_create' %}">Create Doctor</a>
+
+    {% for doctor in doctors %}
+        <div>
+            <h2>{{ doctor.first_name }} {{ doctor.first_lastname }}</h2>
+            <p>ID: {{ doctor.id }}</p>
+            <p>Second Name: {{ doctor.second_name }}</p>
+            <p>Second Last Name: {{ doctor.second_lastname }}</p>
+            <p>Identity ID: {{ doctor.identity_id }}</p>
+            <p>Gender: {{ doctor.gender }}</p>
+            <p>Phone Number: {{ doctor.phone_number }}</p>
+            <p>Specialty: {{ doctor.specialty }}</p>
+            <div>
+                <a href="{% url 'doctors_update' doctor.id %}">Update</a>
+                <a href="{% url 'doctors_disable' doctor.id %}">Disable</a>
+                <a href="{% url 'doctors_delete' doctor.id %}">Delete</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No doctors registered</p>
+    {% endfor %}
+
+    {% if doctors.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ doctors.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ doctors.number }} of {{ doctors.paginator.num_pages }}</span>
+
+    {% if doctors.has_next %}
+        <a href="?page={{ doctors.next_page_number }}">Next</a>
+        <a href="?page={{ doctors.paginator.num_pages }}">Last</a>
+    {% endif %}
+</body>
+</html>

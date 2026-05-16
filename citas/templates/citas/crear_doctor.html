@@ -1,0 +1,26 @@
+<form method="post">
+    {% csrf_token %}
+
+    <input type="text" name="first_name" maxlength="50" required placeholder="First name" />
+    <input type="text" name="second_name" maxlength="50" placeholder="Second name" />
+    <input type="text" name="first_lastname" maxlength="100" required placeholder="Last name" />
+    <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name" />
+    <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID" />
+
+    <select name="gender" required>
+        <option value="">Select gender</option>
+        <option value="True">Male</option>
+        <option value="False">Female</option>
+    </select>
+
+    <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number" />
+    <input type="text" name="specialty" required placeholder="Specialty" />
+
+    <button type="submit">Save</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
