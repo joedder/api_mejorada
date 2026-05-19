@@ -284,7 +284,7 @@ def create_patient(request):
             name_emergency_contact=request.POST.get('name_emergency_contact'),
             last_name_emergency_contact=request.POST.get('last_name_emergency_contact'),
             phone_number_emergency_contact=request.POST.get('phone_number_emergency_contact'),
-            id_patient_record=request.POST.get('id_patient_record'),
+            id_patient_record_id=request.POST.get('id_patient_record') or None,
         )
         messages.success(request, f'Patient "{patient.first_name} {patient.first_lastname}" creado')
         return redirect('patients_create')
@@ -331,12 +331,15 @@ def patients_update(request, pk):
         patient.name_emergency_contact = request.POST.get('name_emergency_contact')
         patient.last_name_emergency_contact = request.POST.get('last_name_emergency_contact')
         patient.phone_number_emergency_contact = request.POST.get('phone_number_emergency_contact')
+        patient.id_patient_record_id = request.POST.get('id_patient_record') or None
         patient.save()
         messages.success(request, f'Patient "{patient.first_name} {patient.first_lastname}" actualizado')
         return redirect('patient')
 
+    patientrecords = PatientRecord.objects.all()
     return render(request, 'citas/patient_show.html', {
         'patient': patient,
+        'patientrecords': patientrecords,
         'editing': True,
     })
 
