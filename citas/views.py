@@ -427,13 +427,13 @@ def create_medicalappointment(request):
     if request.method == 'POST':
         medicalappointment = MedicalAppointment.objects.create(
             id_doctor_id=request.POST.get('id_doctor'),
-            appointment_time=request.POST.get('appointment_time'),
+            appointment_time=request.POST.get('appointment_time') or None,
             reason_appointment=request.POST.get('reason_appointment'),
             type_id_id=request.POST.get('type_id'),
             priority_id_id=request.POST.get('priority_id'),
-            cancellation_date=request.POST.get('cancellation_date'),
+            cancellation_date=request.POST.get('cancellation_date') or None,
             reason_for_cancellation=request.POST.get('reason_for_cancellation'),
-            rescheduled_date=request.POST.get('rescheduled_date'),
+            rescheduled_date=request.POST.get('rescheduled_date') or None,
             patient_record_id=request.POST.get('patient_record'),
             patient_comments=request.POST.get('patient_comments'),
             active=request.POST.get('active') or True,
@@ -476,13 +476,13 @@ def medicalappointments_update(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     if request.method == 'POST':
         medicalappointment.id_doctor_id = request.POST.get('id_doctor')
-        medicalappointment.appointment_time = request.POST.get('appointment_time')
+        medicalappointment.appointment_time = request.POST.get('appointment_time') or None
         medicalappointment.reason_appointment = request.POST.get('reason_appointment')
         medicalappointment.type_id_id = request.POST.get('type_id')
         medicalappointment.priority_id_id = request.POST.get('priority_id')
-        medicalappointment.cancellation_date = request.POST.get('cancellation_date')
+        medicalappointment.cancellation_date = request.POST.get('cancellation_date') or None
         medicalappointment.reason_for_cancellation = request.POST.get('reason_for_cancellation')
-        medicalappointment.rescheduled_date = request.POST.get('rescheduled_date')
+        medicalappointment.rescheduled_date = request.POST.get('rescheduled_date') or None
         medicalappointment.patient_record_id = request.POST.get('patient_record')
         medicalappointment.patient_comments = request.POST.get('patient_comments')
         medicalappointment.active = request.POST.get('active') or True
