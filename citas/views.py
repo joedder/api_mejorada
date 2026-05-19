@@ -362,7 +362,7 @@ def create_patientrecord(request):
     if request.method == 'POST':
         patientrecord = PatientRecord.objects.create(
             entry_date=request.POST.get('entry_date'),
-            id_patient=request.POST.get('id_patient'),
+            id_patient_id=request.POST.get('id_patient'),
         )
         messages.success(request, f'Patient record "{patientrecord.id}" creado')
         return redirect('patientrecords_create')
@@ -396,7 +396,7 @@ def patientrecords_update(request, pk):
     patientrecord = get_object_or_404(PatientRecord, pk=pk)
     if request.method == 'POST':
         patientrecord.entry_date = request.POST.get('entry_date')
-        patientrecord.id_patient = request.POST.get('id_patient')
+        patientrecord.id_patient_id = request.POST.get('id_patient')
         patientrecord.save()
         messages.success(request, f'Patient record "{patientrecord.id}" actualizado')
         return redirect('patientrecord')
@@ -426,15 +426,15 @@ def patientrecords_delete(request, pk):
 def create_medicalappointment(request):
     if request.method == 'POST':
         medicalappointment = MedicalAppointment.objects.create(
-            id_doctor=request.POST.get('id_doctor'),
+            id_doctor_id=request.POST.get('id_doctor'),
             appointment_time=request.POST.get('appointment_time'),
             reason_appointment=request.POST.get('reason_appointment'),
-            type_id=request.POST.get('type_id'),
-            priority_id=request.POST.get('priority_id'),
+            type_id_id=request.POST.get('type_id'),
+            priority_id_id=request.POST.get('priority_id'),
             cancellation_date=request.POST.get('cancellation_date'),
             reason_for_cancellation=request.POST.get('reason_for_cancellation'),
             rescheduled_date=request.POST.get('rescheduled_date'),
-            patient_record=request.POST.get('patient_record'),
+            patient_record_id=request.POST.get('patient_record'),
             patient_comments=request.POST.get('patient_comments'),
             active=request.POST.get('active') or True,
         )
@@ -475,15 +475,15 @@ def medicalappointment_show(request, pk):
 def medicalappointments_update(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     if request.method == 'POST':
-        medicalappointment.id_doctor = request.POST.get('id_doctor')
+        medicalappointment.id_doctor_id = request.POST.get('id_doctor')
         medicalappointment.appointment_time = request.POST.get('appointment_time')
         medicalappointment.reason_appointment = request.POST.get('reason_appointment')
-        medicalappointment.type_id = request.POST.get('type_id')
-        medicalappointment.priority_id = request.POST.get('priority_id')
+        medicalappointment.type_id_id = request.POST.get('type_id')
+        medicalappointment.priority_id_id = request.POST.get('priority_id')
         medicalappointment.cancellation_date = request.POST.get('cancellation_date')
         medicalappointment.reason_for_cancellation = request.POST.get('reason_for_cancellation')
         medicalappointment.rescheduled_date = request.POST.get('rescheduled_date')
-        medicalappointment.patient_record = request.POST.get('patient_record')
+        medicalappointment.patient_record_id = request.POST.get('patient_record')
         medicalappointment.patient_comments = request.POST.get('patient_comments')
         medicalappointment.active = request.POST.get('active') or True
         medicalappointment.save()
@@ -521,10 +521,10 @@ def medicalappointments_delete(request, pk):
 def create_medicalrecord(request):
     if request.method == 'POST':
         medicalrecord = MedicalRecord.objects.create(
-            category=request.POST.get('category'),
+            category_id=request.POST.get('category'),
             name=request.POST.get('name'),
             description=request.POST.get('description'),
-            id_patient_record=request.POST.get('id_patient_record'),
+            id_patient_record_id=request.POST.get('id_patient_record'),
         )
         messages.success(request, f'Medical record "{medicalrecord.name}" creado')
         return redirect('medicalrecords_create')
@@ -559,10 +559,10 @@ def medicalrecord_show(request, pk):
 def medicalrecords_update(request, pk):
     medicalrecord = get_object_or_404(MedicalRecord, pk=pk)
     if request.method == 'POST':
-        medicalrecord.category = request.POST.get('category')
+        medicalrecord.category_id = request.POST.get('category')
         medicalrecord.name = request.POST.get('name')
         medicalrecord.description = request.POST.get('description')
-        medicalrecord.id_patient_record = request.POST.get('id_patient_record')
+        medicalrecord.id_patient_record_id = request.POST.get('id_patient_record')
         medicalrecord.save()
         messages.success(request, f'Medical record "{medicalrecord.name}" actualizado')
         return redirect('medicalrecord')
