@@ -1,0 +1,100 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Create Medical Appointment{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Create Medical Appointment</h1>
+</section>
+
+<form class="panel-form" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label class="form-label">Doctor</label>
+        <select name="id_doctor" required>
+            <option value="">Select doctor</option>
+            {% for doctor in doctors %}
+                <option value="{{ doctor.id }}">{{ doctor.first_name }} {{ doctor.first_lastname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Appointment Time</label>
+        <input type="datetime-local" name="appointment_time" required>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Reason</label>
+        <textarea name="reason_appointment" rows="4" required></textarea>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Type</label>
+        <select name="type_id" required>
+            <option value="">Select type</option>
+            {% for typeappointment in typeappointments %}
+                <option value="{{ typeappointment.id }}">{{ typeappointment.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Priority</label>
+        <select name="priority_id" required>
+            <option value="">Select priority</option>
+            {% for priority in priorities %}
+                <option value="{{ priority.id }}">{{ priority.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Cancellation Date</label>
+        <input type="datetime-local" name="cancellation_date">
+    </div>
+    <div class="form-field">
+        <label class="form-label">Reason for Cancellation</label>
+        <textarea name="reason_for_cancellation" rows="3"></textarea>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Rescheduled Date</label>
+        <input type="datetime-local" name="rescheduled_date">
+    </div>
+    <div class="form-field">
+        <label class="form-label">Patient Record</label>
+        <select name="patient_record" required>
+            <option value="">Select patient record</option>
+            {% for patientrecord in patientrecords %}
+                <option value="{{ patientrecord.id }}">{{ patientrecord.id }} — {{ patientrecord.id_patient }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Patient Comments</label>
+        <textarea name="patient_comments" rows="4"></textarea>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Active</label>
+        <select name="active" required>
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
+    </div>
+    <div class="form-actions">
+        <button class="button button-primary" type="submit">Save</button>
+        <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}

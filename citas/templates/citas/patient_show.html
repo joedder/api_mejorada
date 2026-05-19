@@ -1,0 +1,121 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Patient Detail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Patient Detail</h1>
+</section>
+
+{% if editing %}
+    <form class="panel-form" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label class="form-label">First Name</label>
+            <input type="text" name="first_name" maxlength="50" required value="{{ patient.first_name }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Second Name</label>
+            <input type="text" name="second_name" maxlength="50" value="{{ patient.second_name }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">First Last Name</label>
+            <input type="text" name="first_lastname" maxlength="100" required value="{{ patient.first_lastname }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Second Last Name</label>
+            <input type="text" name="second_lastname" maxlength="100" value="{{ patient.second_lastname }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Identity ID</label>
+            <input type="text" name="identity_id" maxlength="15" required value="{{ patient.identity_id }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Birth Date</label>
+            <input type="date" name="birth_date" required value="{{ patient.birth_date }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Gender</label>
+            <select name="gender" required>
+                <option value="True" {% if patient.gender %}selected{% endif %}>Male</option>
+                <option value="False" {% if not patient.gender %}selected{% endif %}>Female</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Phone Number</label>
+            <input type="text" name="phone_number" maxlength="15" required value="{{ patient.phone_number }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Mobile Number</label>
+            <input type="text" name="mobile_number" maxlength="15" required value="{{ patient.mobile_number }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Address</label>
+            <textarea name="address" rows="3" required>{{ patient.address }}</textarea>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Blood Group</label>
+            <input type="text" name="blood_group" maxlength="8" required value="{{ patient.blood_group }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Emergency Contact First Name</label>
+            <input type="text" name="name_emergency_contact" maxlength="100" value="{{ patient.name_emergency_contact }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Emergency Contact Last Name</label>
+            <input type="text" name="last_name_emergency_contact" maxlength="100" value="{{ patient.last_name_emergency_contact }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Emergency Contact Phone</label>
+            <input type="text" name="phone_number_emergency_contact" maxlength="15" value="{{ patient.phone_number_emergency_contact }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Patient Record</label>
+            <select name="id_patient_record">
+                <option value="">None</option>
+                {% for patientrecord in patientrecords %}
+                    <option value="{{ patientrecord.id }}" {% if patient.id_patient_record_id == patientrecord.id %}selected{% endif %}>{{ patientrecord.id }} — {{ patientrecord.id_patient }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save</button>
+            <a class="button button-secondary" href="{% url 'patient' %}">Cancel</a>
+        </div>
+    </form>
+{% else %}
+    <section class="show-panel">
+        <p>ID: {{ patient.id }}</p>
+        <p>Name: {{ patient.first_name }} {{ patient.first_lastname }}</p>
+        <p>Identity ID: {{ patient.identity_id }}</p>
+        <p>Birth Date: {{ patient.birth_date }}</p>
+        <p>Gender: {{ patient.gender|yesno:"Male,Female" }}</p>
+        <p>Phone: {{ patient.phone_number }}</p>
+        <p>Mobile: {{ patient.mobile_number }}</p>
+        <p>Blood Group: {{ patient.blood_group }}</p>
+        <p>Emergency Contact: {{ patient.name_emergency_contact }} {{ patient.last_name_emergency_contact }}</p>
+        <p>Emergency Phone: {{ patient.phone_number_emergency_contact }}</p>
+        <p>Patient Record: {{ patient.id_patient_record }}</p>
+        <div class="form-actions">
+            <a class="button button-primary" href="{% url 'patients_update' patient.id %}">Edit</a>
+            <a class="button button-secondary" href="{% url 'patient' %}">Back</a>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

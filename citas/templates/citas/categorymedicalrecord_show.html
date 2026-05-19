@@ -1,0 +1,53 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Category Medical Record Detail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Category Medical Record Detail</h1>
+</section>
+
+{% if editing %}
+    <form class="panel-form" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" maxlength="250" required value="{{ categorymedicalrecord.name }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Description</label>
+            <textarea name="description" rows="5">{{ categorymedicalrecord.description }}</textarea>
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save</button>
+            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Cancel</a>
+        </div>
+    </form>
+{% else %}
+    <section class="show-panel">
+        <p>ID: {{ categorymedicalrecord.id }}</p>
+        <p>Name: {{ categorymedicalrecord.name }}</p>
+        <p>Description: {{ categorymedicalrecord.description }}</p>
+        <div class="form-actions">
+            <a class="button button-primary" href="{% url 'categorymedicalrecords_update' categorymedicalrecord.id %}">Edit</a>
+            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Back</a>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

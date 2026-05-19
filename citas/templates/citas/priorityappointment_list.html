@@ -1,0 +1,59 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Priority Appointment Index{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Priority Appointments</h1>
+    <a class="button button-primary" href="{% url 'priorityappointments_create' %}">Create Priority Appointment</a>
+</section>
+
+<div class="panel-list">
+    {% for priorityappointment in priorityappointments %}
+        <article class="panel-card">
+            <div class="panel-info">
+                <h2>{{ priorityappointment.name }}</h2>
+                <p>ID: {{ priorityappointment.id }}</p>
+                <p>Description: {{ priorityappointment.description }}</p>
+            </div>
+            <div class="card-actions">
+                <a class="button button-secondary" href="{% url 'priorityappointments_update' priorityappointment.id %}">Update</a>
+                <a class="button button-secondary" href="{% url 'priorityappointments_disable' priorityappointment.id %}">Disable</a>
+                <a class="button button-secondary" href="{% url 'priorityappointments_delete' priorityappointment.id %}">Delete</a>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty-message">No priority appointments registered</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if priorityappointments.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ priorityappointments.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ priorityappointments.number }} of {{ priorityappointments.paginator.num_pages }}</span>
+
+    {% if priorityappointments.has_next %}
+        <a href="?page={{ priorityappointments.next_page_number }}">Next</a>
+        <a href="?page={{ priorityappointments.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+{% endblock %}

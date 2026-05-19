@@ -1,0 +1,59 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Type Appointment Index{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/typeappointment.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Type Appointments</h1>
+    <a class="button button-primary" href="{% url 'typeappointments_create' %}">Create Type Appointment</a>
+</section>
+
+<div class="panel-list">
+    {% for typeappointment in typeappointments %}
+        <article class="panel-card">
+            <div class="panel-info">
+                <h2>{{ typeappointment.name }}</h2>
+                <p>ID: {{ typeappointment.id }}</p>
+                <p>Description: {{ typeappointment.description }}</p>
+            </div>
+            <div class="card-actions">
+                <a class="button button-secondary" href="{% url 'typeappointments_update' typeappointment.id %}">Update</a>
+                <a class="button button-secondary" href="{% url 'typeappointments_disable' typeappointment.id %}">Disable</a>
+                <a class="button button-secondary" href="{% url 'typeappointments_delete' typeappointment.id %}">Delete</a>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty-message">No type appointments registered</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if typeappointments.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ typeappointments.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ typeappointments.number }} of {{ typeappointments.paginator.num_pages }}</span>
+
+    {% if typeappointments.has_next %}
+        <a href="?page={{ typeappointments.next_page_number }}">Next</a>
+        <a href="?page={{ typeappointments.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+{% endblock %}

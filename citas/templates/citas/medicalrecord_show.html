@@ -1,0 +1,71 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Medical Record Detail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Medical Record Detail</h1>
+</section>
+
+{% if editing %}
+    <form class="panel-form" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label class="form-label">Category</label>
+            <select name="category" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if medicalrecord.category_id == category.id %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" maxlength="250" required value="{{ medicalrecord.name }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Description</label>
+            <textarea name="description" rows="5">{{ medicalrecord.description }}</textarea>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Patient Record</label>
+            <select name="id_patient_record" required>
+                {% for patientrecord in patientrecords %}
+                    <option value="{{ patientrecord.id }}" {% if medicalrecord.id_patient_record_id == patientrecord.id %}selected{% endif %}>{{ patientrecord.id }} — {{ patientrecord.id_patient }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save</button>
+            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancel</a>
+        </div>
+    </form>
+{% else %}
+    <section class="show-panel">
+        <p>ID: {{ medicalrecord.id }}</p>
+        <p>Category: {{ medicalrecord.category }}</p>
+        <p>Name: {{ medicalrecord.name }}</p>
+        <p>Description: {{ medicalrecord.description }}</p>
+        <p>Patient Record: {{ medicalrecord.id_patient_record }}</p>
+        <div class="form-actions">
+            <a class="button button-primary" href="{% url 'medicalrecords_update' medicalrecord.id %}">Edit</a>
+            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Back</a>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

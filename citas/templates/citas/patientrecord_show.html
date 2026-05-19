@@ -1,0 +1,57 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Patient Record Detail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Patient Record Detail</h1>
+</section>
+
+{% if editing %}
+    <form class="panel-form" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label class="form-label">Entry Date</label>
+            <input type="date" name="entry_date" required value="{{ patientrecord.entry_date }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Patient</label>
+            <select name="id_patient" required>
+                {% for patient in patients %}
+                    <option value="{{ patient.id }}" {% if patientrecord.id_patient_id == patient.id %}selected{% endif %}>{{ patient.first_name }} {{ patient.first_lastname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save</button>
+            <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancel</a>
+        </div>
+    </form>
+{% else %}
+    <section class="show-panel">
+        <p>ID: {{ patientrecord.id }}</p>
+        <p>Entry Date: {{ patientrecord.entry_date }}</p>
+        <p>Patient: {{ patientrecord.id_patient }}</p>
+        <div class="form-actions">
+            <a class="button button-primary" href="{% url 'patientrecords_update' patientrecord.id %}">Edit</a>
+            <a class="button button-secondary" href="{% url 'patientrecord' %}">Back</a>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

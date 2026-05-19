@@ -1,0 +1,46 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Create Patient Record{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Create Patient Record</h1>
+</section>
+
+<form class="panel-form" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label class="form-label">Entry Date</label>
+        <input type="date" name="entry_date" required>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Patient</label>
+        <select name="id_patient" required>
+            <option value="">Select patient</option>
+            {% for patient in patients %}
+                <option value="{{ patient.id }}">{{ patient.first_name }} {{ patient.first_lastname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-actions">
+        <button class="button button-primary" type="submit">Save</button>
+        <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}

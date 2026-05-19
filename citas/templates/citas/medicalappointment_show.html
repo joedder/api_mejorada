@@ -1,0 +1,112 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Medical Appointment Detail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Medical Appointment Detail</h1>
+</section>
+
+{% if editing %}
+    <form class="panel-form" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label class="form-label">Doctor</label>
+            <select name="id_doctor" required>
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}" {% if medicalappointment.id_doctor_id == doctor.id %}selected{% endif %}>{{ doctor.first_name }} {{ doctor.first_lastname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Appointment Time</label>
+            <input type="datetime-local" name="appointment_time" required value="{{ medicalappointment.appointment_time|date:'Y-m-d\TH:i' }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Reason</label>
+            <textarea name="reason_appointment" rows="4">{{ medicalappointment.reason_appointment }}</textarea>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Type</label>
+            <select name="type_id" required>
+                {% for typeappointment in typeappointments %}
+                    <option value="{{ typeappointment.id }}" {% if medicalappointment.type_id_id == typeappointment.id %}selected{% endif %}>{{ typeappointment.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Priority</label>
+            <select name="priority_id" required>
+                {% for priority in priorities %}
+                    <option value="{{ priority.id }}" {% if medicalappointment.priority_id_id == priority.id %}selected{% endif %}>{{ priority.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Cancellation Date</label>
+            <input type="datetime-local" name="cancellation_date" value="{{ medicalappointment.cancellation_date|date:'Y-m-d\TH:i' }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Reason for Cancellation</label>
+            <textarea name="reason_for_cancellation" rows="3">{{ medicalappointment.reason_for_cancellation }}</textarea>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Rescheduled Date</label>
+            <input type="datetime-local" name="rescheduled_date" value="{{ medicalappointment.rescheduled_date|date:'Y-m-d\TH:i' }}">
+        </div>
+        <div class="form-field">
+            <label class="form-label">Patient Record</label>
+            <select name="patient_record" required>
+                {% for patientrecord in patientrecords %}
+                    <option value="{{ patientrecord.id }}" {% if medicalappointment.patient_record_id == patientrecord.id %}selected{% endif %}>{{ patientrecord.id }} — {{ patientrecord.id_patient }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Patient Comments</label>
+            <textarea name="patient_comments" rows="4">{{ medicalappointment.patient_comments }}</textarea>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Active</label>
+            <select name="active" required>
+                <option value="True" {% if medicalappointment.active %}selected{% endif %}>True</option>
+                <option value="False" {% if not medicalappointment.active %}selected{% endif %}>False</option>
+            </select>
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Save</button>
+            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancel</a>
+        </div>
+    </form>
+{% else %}
+    <section class="show-panel">
+        <p>ID: {{ medicalappointment.id }}</p>
+        <p>Doctor: {{ medicalappointment.id_doctor }}</p>
+        <p>Time: {{ medicalappointment.appointment_time }}</p>
+        <p>Type: {{ medicalappointment.type_id }}</p>
+        <p>Priority: {{ medicalappointment.priority_id }}</p>
+        <p>Patient Record: {{ medicalappointment.patient_record }}</p>
+        <p>Active: {{ medicalappointment.active }}</p>
+        <div class="form-actions">
+            <a class="button button-primary" href="{% url 'medicalappointments_update' medicalappointment.id %}">Edit</a>
+            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Back</a>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

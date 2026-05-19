@@ -1,0 +1,59 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Patient Record Index{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Patient Records</h1>
+    <a class="button button-primary" href="{% url 'patientrecords_create' %}">Create Patient Record</a>
+</section>
+
+<div class="panel-list">
+    {% for patientrecord in patientrecords %}
+        <article class="panel-card">
+            <div class="panel-info">
+                <h2>Record #{{ patientrecord.id }}</h2>
+                <p>Patient: {{ patientrecord.id_patient }}</p>
+                <p>Entry Date: {{ patientrecord.entry_date }}</p>
+            </div>
+            <div class="card-actions">
+                <a class="button button-secondary" href="{% url 'patientrecords_update' patientrecord.id %}">Update</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_disable' patientrecord.id %}">Disable</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_delete' patientrecord.id %}">Delete</a>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty-message">No patient records registered</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if patientrecords.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ patientrecords.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ patientrecords.number }} of {{ patientrecords.paginator.num_pages }}</span>
+
+    {% if patientrecords.has_next %}
+        <a href="?page={{ patientrecords.next_page_number }}">Next</a>
+        <a href="?page={{ patientrecords.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+{% endblock %}

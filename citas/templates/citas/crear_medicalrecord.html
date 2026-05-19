@@ -1,0 +1,59 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Create Medical Record{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Create Medical Record</h1>
+</section>
+
+<form class="panel-form" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label class="form-label">Category</label>
+        <select name="category" required>
+            <option value="">Select category</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" maxlength="250" required placeholder="Name">
+    </div>
+    <div class="form-field">
+        <label class="form-label">Description</label>
+        <textarea name="description" rows="5"></textarea>
+    </div>
+    <div class="form-field">
+        <label class="form-label">Patient Record</label>
+        <select name="id_patient_record" required>
+            <option value="">Select patient record</option>
+            {% for patientrecord in patientrecords %}
+                <option value="{{ patientrecord.id }}">{{ patientrecord.id }} — {{ patientrecord.id_patient }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-actions">
+        <button class="button button-primary" type="submit">Save</button>
+        <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
