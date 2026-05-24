@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path ,include
+from citas.views import dashboard as citas_dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('citas/', include('citas.urls')),
+    path('', citas_dashboard, name='dashboard'),
 ]

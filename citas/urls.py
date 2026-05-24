@@ -51,5 +51,4 @@ urlpatterns = [
     path('medicalrecords/disable/<int:pk>/', views.medicalrecords_disable, name='medicalrecords_disable'),
     path('medicalrecords/delete/<int:pk>/', views.medicalrecords_delete, name='medicalrecords_delete'),
     path('hello_world/', views.hello_world),
-    path('', views.dashboard, name='dashboard'),
 ]
