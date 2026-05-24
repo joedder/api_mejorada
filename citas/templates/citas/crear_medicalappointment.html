@@ -60,18 +60,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="form-field">
-        <label class="form-label">Fecha de Cancelación</label>
-        <input type="datetime-local" name="cancellation_date">
-    </div>
-    <div class="form-field">
-        <label class="form-label">Reason for Cancellation</label>
-        <textarea name="reason_for_cancellation" rows="3"></textarea>
-    </div>
-    <div class="form-field">
-        <label class="form-label">Fecha Reprogramada</label>
-        <input type="datetime-local" name="rescheduled_date">
-    </div>
+
     <div class="form-field">
         <label class="form-label">Patient Record</label>
         <select name="patient_record" required>
@@ -85,13 +74,7 @@
         <label class="form-label">Comentarios del Paciente</label>
         <textarea name="patient_comments" rows="4"></textarea>
     </div>
-    <div class="form-field">
-        <label class="form-label">Activo</label>
-        <select name="active" required>
-            <option value="True">True</option>
-            <option value="False">False</option>
-        </select>
-    </div>
+
     <div class="form-actions">
         <button class="button button-primary" type="submit">Guardar</button>
         <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancelar</a>

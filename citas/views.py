@@ -425,18 +425,27 @@ def patientrecords_delete(request, pk):
 
 def create_medicalappointment(request):
     if request.method == 'POST':
+        cancellation_date = request.POST.get('cancellation_date') or None
+        active_val = request.POST.get('active')
+        
+        is_active = True
+        if cancellation_date:
+            is_active = False
+        elif active_val == 'False':
+            is_active = False
+            
         medicalappointment = MedicalAppointment.objects.create(
             id_doctor_id=request.POST.get('id_doctor'),
             appointment_time=request.POST.get('appointment_time') or None,
             reason_appointment=request.POST.get('reason_appointment'),
             type_id_id=request.POST.get('type_id'),
             priority_id_id=request.POST.get('priority_id'),
-            cancellation_date=request.POST.get('cancellation_date') or None,
+            cancellation_date=cancellation_date,
             reason_for_cancellation=request.POST.get('reason_for_cancellation'),
             rescheduled_date=request.POST.get('rescheduled_date') or None,
             patient_record_id=request.POST.get('patient_record'),
             patient_comments=request.POST.get('patient_comments'),
-            active=request.POST.get('active') or True,
+            active=is_active,
         )
         messages.success(request, f'Medical appointment "{medicalappointment.id}" creado')
         return redirect('medicalappointments_create')
@@ -485,7 +494,16 @@ def medicalappointments_update(request, pk):
         medicalappointment.rescheduled_date = request.POST.get('rescheduled_date') or None
         medicalappointment.patient_record_id = request.POST.get('patient_record')
         medicalappointment.patient_comments = request.POST.get('patient_comments')
-        medicalappointment.active = request.POST.get('active') or True
+        
+        if medicalappointment.cancellation_date:
+            medicalappointment.active = False
+        else:
+            active_val = request.POST.get('active')
+            if active_val == 'False':
+                medicalappointment.active = False
+            else:
+                medicalappointment.active = True
+                
         medicalappointment.save()
         messages.success(request, f'Medical appointment "{medicalappointment.id}" actualizado')
         return redirect('medicalappointment')
