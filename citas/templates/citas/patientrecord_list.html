@@ -33,6 +33,7 @@
                 <p>Entry Date: {{ patientrecord.entry_date }}</p>
             </div>
             <div class="card-actions">
+                <a class="button button-secondary" href="{% url 'patientrecords_show' patientrecord.id %}">Show</a>
                 <a class="button button-secondary" href="{% url 'patientrecords_update' patientrecord.id %}">Update</a>
                 <a class="button button-secondary" href="{% url 'patientrecords_disable' patientrecord.id %}">Disable</a>
                 <a class="button button-secondary" href="{% url 'patientrecords_delete' patientrecord.id %}">Delete</a>
