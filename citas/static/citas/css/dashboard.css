@@ -1,0 +1,62 @@
+/* Dashboard layout based exactly on CRUD styles */
+
+.dashboard-grid {
+    display: grid;
+    /* Adapts across screen width like native list but horizontally */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+/* Modifiers for panel-card to make it a square button-like item */
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    text-decoration: none;
+    color: inherit;
+    /* panel-card already gives us background-color, border, and border-radius */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(11, 36, 109, 0.08);
+    border-color: var(--blue);
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--blue);
+}
+
+.dashboard-card h2 {
+    color: var(--blue-dark);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.dashboard-card p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .card-icon {
+        font-size: 2.5rem;
+    }
+    
+    .dashboard-card h2 {
+        font-size: 1.25rem;
+    }
+}

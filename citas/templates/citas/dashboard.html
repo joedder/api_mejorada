@@ -1,0 +1,27 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | Clínica Azul{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Módulos del Sistema</h1>
+    <p class="text-muted" style="margin: 0;">Selecciona un módulo para gestionar los registros correspondientes</p>
+</section>
+
+<div class="dashboard-grid">
+    {% for module in modules %}
+    <a href="{% url module.url %}" class="panel-card dashboard-card">
+        <div class="card-icon">{{ module.icon }}</div>
+        <h2>{{ module.name }}</h2>
+        <p>{{ module.description }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

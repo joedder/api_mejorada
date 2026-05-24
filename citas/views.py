@@ -593,3 +593,56 @@ def medicalrecords_delete(request, pk):
 
 def hello_world(request):
     return HttpResponse("<h1>Hola Mundo<h1>")
+
+def dashboard(request):
+    modules = [
+        {
+            'name': 'Doctores',
+            'url': 'doctor',
+            'icon': '👨‍⚕️',
+            'description': 'Gestión de personal médico'
+        },
+        {
+            'name': 'Pacientes',
+            'url': 'patient',
+            'icon': '🤒',
+            'description': 'Gestión de pacientes'
+        },
+        {
+            'name': 'Citas Médicas',
+            'url': 'medicalappointment',
+            'icon': '📅',
+            'description': 'Control de citas'
+        },
+        {
+            'name': 'Expedientes de Pacientes',
+            'url': 'patientrecord',
+            'icon': '📂',
+            'description': 'Historial clínico por paciente'
+        },
+        {
+            'name': 'Registros Médicos',
+            'url': 'medicalrecord',
+            'icon': '🩺',
+            'description': 'Registros y detalles médicos'
+        },
+        {
+            'name': 'Categorías de Registro',
+            'url': 'categorymedicalrecord',
+            'icon': '📑',
+            'description': 'Categorías para registros'
+        },
+        {
+            'name': 'Tipos de Cita',
+            'url': 'typeappointment',
+            'icon': '🏷️',
+            'description': 'Clasificación de citas'
+        },
+        {
+            'name': 'Prioridades de Cita',
+            'url': 'priorityappointment',
+            'icon': '⭐',
+            'description': 'Niveles de prioridad'
+        },
+    ]
+    return render(request, 'citas/dashboard.html', {'modules': modules})
