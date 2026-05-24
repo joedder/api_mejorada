@@ -27,11 +27,11 @@
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">First Name</label>
+            <label class="form-label">Primer Nombre</label>
             <input type="text" name="first_name" maxlength="50" required value="{{ doctor.first_name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Second Name</label>
+            <label class="form-label">Segundo Nombre</label>
             <input type="text" name="second_name" maxlength="50" value="{{ doctor.second_name }}">
         </div>
         <div class="form-field">
@@ -39,47 +39,47 @@
             <input type="text" name="first_lastname" maxlength="100" required value="{{ doctor.first_lastname }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Second Last Name</label>
+            <label class="form-label">Segundo Apellido</label>
             <input type="text" name="second_lastname" maxlength="100" value="{{ doctor.second_lastname }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Identity ID</label>
+            <label class="form-label">Cédula/ID</label>
             <input type="text" name="identity_id" maxlength="15" required value="{{ doctor.identity_id }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Gender</label>
+            <label class="form-label">Género</label>
             <select name="gender" required>
-                <option value="True" {% if doctor.gender %}selected{% endif %}>Male</option>
-                <option value="False" {% if not doctor.gender %}selected{% endif %}>Female</option>
+                <option value="True" {% if doctor.gender %}selected{% endif %}>Masculino</option>
+                <option value="False" {% if not doctor.gender %}selected{% endif %}>Femenino</option>
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Phone Number</label>
+            <label class="form-label">Número de Teléfono</label>
             <input type="text" name="phone_number" maxlength="15" required value="{{ doctor.phone_number }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Specialty</label>
+            <label class="form-label">Especialidad</label>
             <input type="text" name="specialty" required value="{{ doctor.specialty }}">
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'doctor' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'doctor' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ doctor.id }}</p>
-        <p>First Name: {{ doctor.first_name }}</p>
-        <p>Second Name: {{ doctor.second_name }}</p>
-        <p>Last Name: {{ doctor.first_lastname }}</p>
-        <p>Second Last Name: {{ doctor.second_lastname }}</p>
-        <p>Identity ID: {{ doctor.identity_id }}</p>
-        <p>Gender: {{ doctor.gender|yesno:"Male,Female" }}</p>
-        <p>Phone Number: {{ doctor.phone_number }}</p>
-        <p>Specialty: {{ doctor.specialty }}</p>
+        <p>Primer Nombre: {{ doctor.first_name }}</p>
+        <p>Segundo Nombre: {{ doctor.second_name }}</p>
+        <p>Last Nombre: {{ doctor.first_lastname }}</p>
+        <p>Segundo Apellido: {{ doctor.second_lastname }}</p>
+        <p>Cédula/ID: {{ doctor.identity_id }}</p>
+        <p>Género: {{ doctor.gender|yesno:"Masculino,Femenino" }}</p>
+        <p>Número de Teléfono: {{ doctor.phone_number }}</p>
+        <p>Especialidad: {{ doctor.specialty }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'doctors_update' doctor.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'doctor' %}">Back</a>
+            <a class="button button-primary" href="{% url 'doctors_update' doctor.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'doctor' %}">Volver</a>
         </div>
     </section>
 {% endif %}

@@ -20,57 +20,57 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Create Patient</h1>
+    <h1>Crear Paciente</h1>
 </section>
 
 <form class="panel-form" method="post">
     {% csrf_token %}
     <div class="form-field">
-        <label class="form-label">First Name</label>
+        <label class="form-label">Primer Nombre</label>
         <input type="text" name="first_name" maxlength="50" required placeholder="First name">
     </div>
     <div class="form-field">
-        <label class="form-label">Second Name</label>
+        <label class="form-label">Segundo Nombre</label>
         <input type="text" name="second_name" maxlength="50" placeholder="Second name">
     </div>
     <div class="form-field">
-        <label class="form-label">First Last Name</label>
+        <label class="form-label">Primer Apellido</label>
         <input type="text" name="first_lastname" maxlength="100" required placeholder="First last name">
     </div>
     <div class="form-field">
-        <label class="form-label">Second Last Name</label>
+        <label class="form-label">Segundo Apellido</label>
         <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name">
     </div>
     <div class="form-field">
-        <label class="form-label">Identity ID</label>
+        <label class="form-label">Cédula/ID</label>
         <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID">
     </div>
     <div class="form-field">
-        <label class="form-label">Birth Date</label>
+        <label class="form-label">Fecha de Nacimiento</label>
         <input type="date" name="birth_date" required>
     </div>
     <div class="form-field">
-        <label class="form-label">Gender</label>
+        <label class="form-label">Género</label>
         <select name="gender" required>
             <option value="">Select gender</option>
-            <option value="True">Male</option>
-            <option value="False">Female</option>
+            <option value="True">Masculino</option>
+            <option value="False">Femenino</option>
         </select>
     </div>
     <div class="form-field">
-        <label class="form-label">Phone Number</label>
+        <label class="form-label">Número de Teléfono</label>
         <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number">
     </div>
     <div class="form-field">
-        <label class="form-label">Mobile Number</label>
+        <label class="form-label">Número Celular</label>
         <input type="text" name="mobile_number" maxlength="15" required placeholder="Mobile number">
     </div>
     <div class="form-field">
-        <label class="form-label">Address</label>
+        <label class="form-label">Dirección</label>
         <textarea name="address" rows="3" required placeholder="Address"></textarea>
     </div>
     <div class="form-field">
-        <label class="form-label">Blood Group</label>
+        <label class="form-label">Grupo Sanguíneo</label>
         <input type="text" name="blood_group" maxlength="8" required placeholder="Blood group">
     </div>
     <div class="form-field">
@@ -95,8 +95,8 @@
         </select>
     </div>
     <div class="form-actions">
-        <button class="button button-primary" type="submit">Save</button>
-        <a class="button button-secondary" href="{% url 'patient' %}">Cancel</a>
+        <button class="button button-primary" type="submit">Guardar</button>
+        <a class="button button-secondary" href="{% url 'patient' %}">Cancelar</a>
     </div>
 </form>
 {% endblock %}

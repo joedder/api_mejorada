@@ -20,8 +20,8 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Patient Records</h1>
-    <a class="button button-primary" href="{% url 'patientrecords_create' %}">Create Patient Record</a>
+    <h1>Expedientes de Pacientes</h1>
+    <a class="button button-primary" href="{% url 'patientrecords_create' %}">Crear Expediente</a>
 </section>
 
 <div class="panel-list">
@@ -29,32 +29,32 @@
         <article class="panel-card">
             <div class="panel-info">
                 <h2>Record #{{ patientrecord.id }}</h2>
-                <p>Patient: {{ patientrecord.id_patient }}</p>
-                <p>Entry Date: {{ patientrecord.entry_date }}</p>
+                <p>Paciente: {{ patientrecord.id_patient }}</p>
+                <p>Fecha de Ingreso: {{ patientrecord.entry_date }}</p>
             </div>
             <div class="card-actions">
-                <a class="button button-secondary" href="{% url 'patientrecords_show' patientrecord.id %}">Show</a>
-                <a class="button button-secondary" href="{% url 'patientrecords_update' patientrecord.id %}">Update</a>
-                <a class="button button-secondary" href="{% url 'patientrecords_disable' patientrecord.id %}">Disable</a>
-                <a class="button button-secondary" href="{% url 'patientrecords_delete' patientrecord.id %}">Delete</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_show' patientrecord.id %}">Mostrar</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_update' patientrecord.id %}">Actualizar</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_disable' patientrecord.id %}">Desactivar</a>
+                <a class="button button-secondary" href="{% url 'patientrecords_delete' patientrecord.id %}">Eliminar</a>
             </div>
         </article>
     {% empty %}
-        <p class="empty-message">No patient records registered</p>
+        <p class="empty-message">No hay expedientes registrados</p>
     {% endfor %}
 </div>
 
 <div class="pagination">
     {% if patientrecords.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ patientrecords.previous_page_number }}">Previous</a>
+        <a href="?page=1">Primera</a>
+        <a href="?page={{ patientrecords.previous_page_number }}">Anterior</a>
     {% endif %}
 
-    <span>Page {{ patientrecords.number }} of {{ patientrecords.paginator.num_pages }}</span>
+    <span>Página {{ patientrecords.number }} de {{ patientrecords.paginator.num_pages }}</span>
 
     {% if patientrecords.has_next %}
-        <a href="?page={{ patientrecords.next_page_number }}">Next</a>
-        <a href="?page={{ patientrecords.paginator.num_pages }}">Last</a>
+        <a href="?page={{ patientrecords.next_page_number }}">Siguiente</a>
+        <a href="?page={{ patientrecords.paginator.num_pages }}">Última</a>
     {% endif %}
 </div>
 {% endblock %}

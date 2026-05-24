@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Doctor Index{% endblock %}
+{% block title %}Índice de Doctores{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,8 +20,8 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Doctors</h1>
-    <a class="button button-primary" href="{% url 'doctors_create' %}">Create Doctor</a>
+    <h1>Doctores</h1>
+    <a class="button button-primary" href="{% url 'doctors_create' %}">Crear Doctor</a>
 </section>
 
 <div class="panel-list">
@@ -30,35 +30,35 @@
             <div class="panel-info">
                 <h2>{{ doctor.first_name }} {{ doctor.first_lastname }}</h2>
                 <p>ID: {{ doctor.id }}</p>
-                <p>Second Name: {{ doctor.second_name }}</p>
-                <p>Second Last Name: {{ doctor.second_lastname }}</p>
-                <p>Identity ID: {{ doctor.identity_id }}</p>
-                <p>Gender: {{ doctor.gender|yesno:"Male,Female" }}</p>
-                <p>Phone Number: {{ doctor.phone_number }}</p>
-                <p>Specialty: {{ doctor.specialty }}</p>
+                <p>Segundo Nombre: {{ doctor.second_name }}</p>
+                <p>Segundo Apellido: {{ doctor.second_lastname }}</p>
+                <p>Cédula/ID: {{ doctor.identity_id }}</p>
+                <p>Género: {{ doctor.gender|yesno:"Masculino,Femenino" }}</p>
+                <p>Número de Teléfono: {{ doctor.phone_number }}</p>
+                <p>Especialidad: {{ doctor.specialty }}</p>
             </div>
             <div class="card-actions">
-                <a class="button button-secondary" href="{% url 'doctors_update' doctor.id %}">Update</a>
-                <a class="button button-secondary" href="{% url 'doctors_disable' doctor.id %}">Disable</a>
-                <a class="button button-secondary" href="{% url 'doctors_delete' doctor.id %}">Delete</a>
+                <a class="button button-secondary" href="{% url 'doctors_update' doctor.id %}">Actualizar</a>
+                <a class="button button-secondary" href="{% url 'doctors_disable' doctor.id %}">Desactivar</a>
+                <a class="button button-secondary" href="{% url 'doctors_delete' doctor.id %}">Eliminar</a>
             </div>
         </article>
     {% empty %}
-        <p class="empty-message">No doctors registered</p>
+        <p class="empty-message">No hay doctores registrados</p>
     {% endfor %}
 </div>
 
 <div class="pagination">
     {% if doctors.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ doctors.previous_page_number }}">Previous</a>
+        <a href="?page=1">Primera</a>
+        <a href="?page={{ doctors.previous_page_number }}">Anterior</a>
     {% endif %}
 
-    <span>Page {{ doctors.number }} of {{ doctors.paginator.num_pages }}</span>
+    <span>Página {{ doctors.number }} de {{ doctors.paginator.num_pages }}</span>
 
     {% if doctors.has_next %}
-        <a href="?page={{ doctors.next_page_number }}">Next</a>
-        <a href="?page={{ doctors.paginator.num_pages }}">Last</a>
+        <a href="?page={{ doctors.next_page_number }}">Siguiente</a>
+        <a href="?page={{ doctors.paginator.num_pages }}">Última</a>
     {% endif %}
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Type Appointment Detail{% endblock %}
+{% block title %}Detalle de Tipo de Cita{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,33 +20,33 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Type Appointment Detail</h1>
+    <h1>Detalle de Tipo de Cita</h1>
 </section>
 
 {% if editing %}
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">Name</label>
+            <label class="form-label">Nombre</label>
             <input type="text" name="name" maxlength="250" required value="{{ typeappointment.name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Description</label>
+            <label class="form-label">Descripción</label>
             <textarea name="description" rows="5">{{ typeappointment.description }}</textarea>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'typeappointment' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'typeappointment' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ typeappointment.id }}</p>
-        <p>Name: {{ typeappointment.name }}</p>
-        <p>Description: {{ typeappointment.description }}</p>
+        <p>Nombre: {{ typeappointment.name }}</p>
+        <p>Descripción: {{ typeappointment.description }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'typeappointments_update' typeappointment.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'typeappointment' %}">Back</a>
+            <a class="button button-primary" href="{% url 'typeappointments_update' typeappointment.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'typeappointment' %}">Volver</a>
         </div>
     </section>
 {% endif %}

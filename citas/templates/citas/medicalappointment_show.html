@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Medical Appointment Detail{% endblock %}
+{% block title %}Detalle de Cita Médica{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,7 +20,7 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Medical Appointment Detail</h1>
+    <h1>Detalle de Cita Médica</h1>
 </section>
 
 {% if editing %}
@@ -35,7 +35,7 @@
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Appointment Time</label>
+            <label class="form-label">Hora de Cita</label>
             <input type="datetime-local" name="appointment_time" required value="{{ medicalappointment.appointment_time|date:'Y-m-d\TH:i' }}">
         </div>
         <div class="form-field">
@@ -59,7 +59,7 @@
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Cancellation Date</label>
+            <label class="form-label">Fecha de Cancelación</label>
             <input type="datetime-local" name="cancellation_date" value="{{ medicalappointment.cancellation_date|date:'Y-m-d\TH:i' }}">
         </div>
         <div class="form-field">
@@ -67,7 +67,7 @@
             <textarea name="reason_for_cancellation" rows="3">{{ medicalappointment.reason_for_cancellation }}</textarea>
         </div>
         <div class="form-field">
-            <label class="form-label">Rescheduled Date</label>
+            <label class="form-label">Fecha Reprogramada</label>
             <input type="datetime-local" name="rescheduled_date" value="{{ medicalappointment.rescheduled_date|date:'Y-m-d\TH:i' }}">
         </div>
         <div class="form-field">
@@ -79,19 +79,19 @@
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Patient Comments</label>
+            <label class="form-label">Comentarios del Paciente</label>
             <textarea name="patient_comments" rows="4">{{ medicalappointment.patient_comments }}</textarea>
         </div>
         <div class="form-field">
-            <label class="form-label">Active</label>
+            <label class="form-label">Activo</label>
             <select name="active" required>
                 <option value="True" {% if medicalappointment.active %}selected{% endif %}>True</option>
                 <option value="False" {% if not medicalappointment.active %}selected{% endif %}>False</option>
             </select>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
@@ -100,12 +100,12 @@
         <p>Doctor: {{ medicalappointment.id_doctor }}</p>
         <p>Time: {{ medicalappointment.appointment_time }}</p>
         <p>Type: {{ medicalappointment.type_id }}</p>
-        <p>Priority: {{ medicalappointment.priority_id }}</p>
+        <p>Prioridad: {{ medicalappointment.priority_id }}</p>
         <p>Patient Record: {{ medicalappointment.patient_record }}</p>
-        <p>Active: {{ medicalappointment.active }}</p>
+        <p>Activo: {{ medicalappointment.active }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'medicalappointments_update' medicalappointment.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Back</a>
+            <a class="button button-primary" href="{% url 'medicalappointments_update' medicalappointment.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'medicalappointment' %}">Volver</a>
         </div>
     </section>
 {% endif %}

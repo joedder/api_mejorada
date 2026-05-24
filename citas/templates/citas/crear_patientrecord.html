@@ -20,17 +20,17 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Create Patient Record</h1>
+    <h1>Crear Expediente</h1>
 </section>
 
 <form class="panel-form" method="post">
     {% csrf_token %}
     <div class="form-field">
-        <label class="form-label">Entry Date</label>
+        <label class="form-label">Fecha de Ingreso</label>
         <input type="date" name="entry_date" required>
     </div>
     <div class="form-field">
-        <label class="form-label">Patient</label>
+        <label class="form-label">Paciente</label>
         <select name="id_patient" required>
             <option value="">Select patient</option>
             {% for patient in patients %}
@@ -39,8 +39,8 @@
         </select>
     </div>
     <div class="form-actions">
-        <button class="button button-primary" type="submit">Save</button>
-        <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancel</a>
+        <button class="button button-primary" type="submit">Guardar</button>
+        <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancelar</a>
     </div>
 </form>
 {% endblock %}

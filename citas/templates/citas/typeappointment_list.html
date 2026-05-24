@@ -20,8 +20,8 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Type Appointments</h1>
-    <a class="button button-primary" href="{% url 'typeappointments_create' %}">Create Type Appointment</a>
+    <h1>Tipos de Citas</h1>
+    <a class="button button-primary" href="{% url 'typeappointments_create' %}">Crear Tipo de Cita</a>
 </section>
 
 <div class="panel-list">
@@ -30,30 +30,30 @@
             <div class="panel-info">
                 <h2>{{ typeappointment.name }}</h2>
                 <p>ID: {{ typeappointment.id }}</p>
-                <p>Description: {{ typeappointment.description }}</p>
+                <p>Descripción: {{ typeappointment.description }}</p>
             </div>
             <div class="card-actions">
-                <a class="button button-secondary" href="{% url 'typeappointments_update' typeappointment.id %}">Update</a>
-                <a class="button button-secondary" href="{% url 'typeappointments_disable' typeappointment.id %}">Disable</a>
-                <a class="button button-secondary" href="{% url 'typeappointments_delete' typeappointment.id %}">Delete</a>
+                <a class="button button-secondary" href="{% url 'typeappointments_update' typeappointment.id %}">Actualizar</a>
+                <a class="button button-secondary" href="{% url 'typeappointments_disable' typeappointment.id %}">Desactivar</a>
+                <a class="button button-secondary" href="{% url 'typeappointments_delete' typeappointment.id %}">Eliminar</a>
             </div>
         </article>
     {% empty %}
-        <p class="empty-message">No type appointments registered</p>
+        <p class="empty-message">No hay tipos de citas registrados</p>
     {% endfor %}
 </div>
 
 <div class="pagination">
     {% if typeappointments.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ typeappointments.previous_page_number }}">Previous</a>
+        <a href="?page=1">Primera</a>
+        <a href="?page={{ typeappointments.previous_page_number }}">Anterior</a>
     {% endif %}
 
-    <span>Page {{ typeappointments.number }} of {{ typeappointments.paginator.num_pages }}</span>
+    <span>Página {{ typeappointments.number }} de {{ typeappointments.paginator.num_pages }}</span>
 
     {% if typeappointments.has_next %}
-        <a href="?page={{ typeappointments.next_page_number }}">Next</a>
-        <a href="?page={{ typeappointments.paginator.num_pages }}">Last</a>
+        <a href="?page={{ typeappointments.next_page_number }}">Siguiente</a>
+        <a href="?page={{ typeappointments.paginator.num_pages }}">Última</a>
     {% endif %}
 </div>
 {% endblock %}

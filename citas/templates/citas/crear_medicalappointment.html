@@ -20,7 +20,7 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Create Medical Appointment</h1>
+    <h1>Crear Cita Médica</h1>
 </section>
 
 <form class="panel-form" method="post">
@@ -35,7 +35,7 @@
         </select>
     </div>
     <div class="form-field">
-        <label class="form-label">Appointment Time</label>
+        <label class="form-label">Hora de Cita</label>
         <input type="datetime-local" name="appointment_time" required>
     </div>
     <div class="form-field">
@@ -61,7 +61,7 @@
         </select>
     </div>
     <div class="form-field">
-        <label class="form-label">Cancellation Date</label>
+        <label class="form-label">Fecha de Cancelación</label>
         <input type="datetime-local" name="cancellation_date">
     </div>
     <div class="form-field">
@@ -69,7 +69,7 @@
         <textarea name="reason_for_cancellation" rows="3"></textarea>
     </div>
     <div class="form-field">
-        <label class="form-label">Rescheduled Date</label>
+        <label class="form-label">Fecha Reprogramada</label>
         <input type="datetime-local" name="rescheduled_date">
     </div>
     <div class="form-field">
@@ -82,19 +82,19 @@
         </select>
     </div>
     <div class="form-field">
-        <label class="form-label">Patient Comments</label>
+        <label class="form-label">Comentarios del Paciente</label>
         <textarea name="patient_comments" rows="4"></textarea>
     </div>
     <div class="form-field">
-        <label class="form-label">Active</label>
+        <label class="form-label">Activo</label>
         <select name="active" required>
             <option value="True">True</option>
             <option value="False">False</option>
         </select>
     </div>
     <div class="form-actions">
-        <button class="button button-primary" type="submit">Save</button>
-        <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancel</a>
+        <button class="button button-primary" type="submit">Guardar</button>
+        <a class="button button-secondary" href="{% url 'medicalappointment' %}">Cancelar</a>
     </div>
 </form>
 {% endblock %}

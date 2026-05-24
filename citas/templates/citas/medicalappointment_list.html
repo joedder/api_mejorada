@@ -20,8 +20,8 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Medical Appointments</h1>
-    <a class="button button-primary" href="{% url 'medicalappointments_create' %}">Create Medical Appointment</a>
+    <h1>Citas Médicas</h1>
+    <a class="button button-primary" href="{% url 'medicalappointments_create' %}">Crear Cita Médica</a>
 </section>
 
 <div class="panel-list">
@@ -31,30 +31,30 @@
                 <h2>Appointment #{{ medicalappointment.id }}</h2>
                 <p>Doctor: {{ medicalappointment.id_doctor }}</p>
                 <p>Time: {{ medicalappointment.appointment_time }}</p>
-                <p>Active: {{ medicalappointment.active }}</p>
+                <p>Activo: {{ medicalappointment.active }}</p>
             </div>
             <div class="card-actions">
-                <a class="button button-secondary" href="{% url 'medicalappointments_update' medicalappointment.id %}">Update</a>
-                <a class="button button-secondary" href="{% url 'medicalappointments_disable' medicalappointment.id %}">Disable</a>
-                <a class="button button-secondary" href="{% url 'medicalappointments_delete' medicalappointment.id %}">Delete</a>
+                <a class="button button-secondary" href="{% url 'medicalappointments_update' medicalappointment.id %}">Actualizar</a>
+                <a class="button button-secondary" href="{% url 'medicalappointments_disable' medicalappointment.id %}">Desactivar</a>
+                <a class="button button-secondary" href="{% url 'medicalappointments_delete' medicalappointment.id %}">Eliminar</a>
             </div>
         </article>
     {% empty %}
-        <p class="empty-message">No medical appointments registered</p>
+        <p class="empty-message">No hay citas médicas registradas</p>
     {% endfor %}
 </div>
 
 <div class="pagination">
     {% if medicalappointments.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ medicalappointments.previous_page_number }}">Previous</a>
+        <a href="?page=1">Primera</a>
+        <a href="?page={{ medicalappointments.previous_page_number }}">Anterior</a>
     {% endif %}
 
-    <span>Page {{ medicalappointments.number }} of {{ medicalappointments.paginator.num_pages }}</span>
+    <span>Página {{ medicalappointments.number }} de {{ medicalappointments.paginator.num_pages }}</span>
 
     {% if medicalappointments.has_next %}
-        <a href="?page={{ medicalappointments.next_page_number }}">Next</a>
-        <a href="?page={{ medicalappointments.paginator.num_pages }}">Last</a>
+        <a href="?page={{ medicalappointments.next_page_number }}">Siguiente</a>
+        <a href="?page={{ medicalappointments.paginator.num_pages }}">Última</a>
     {% endif %}
 </div>
 {% endblock %}

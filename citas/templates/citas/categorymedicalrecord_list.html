@@ -20,8 +20,8 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Category Medical Records</h1>
-    <a class="button button-primary" href="{% url 'categorymedicalrecords_create' %}">Create Category Medical Record</a>
+    <h1>Categorías de Registros</h1>
+    <a class="button button-primary" href="{% url 'categorymedicalrecords_create' %}">Crear Categoría de Registro</a>
 </section>
 
 <div class="panel-list">
@@ -30,30 +30,30 @@
             <div class="panel-info">
                 <h2>{{ categorymedicalrecord.name }}</h2>
                 <p>ID: {{ categorymedicalrecord.id }}</p>
-                <p>Description: {{ categorymedicalrecord.description }}</p>
+                <p>Descripción: {{ categorymedicalrecord.description }}</p>
             </div>
             <div class="card-actions">
-                <a class="button button-secondary" href="{% url 'categorymedicalrecords_update' categorymedicalrecord.id %}">Update</a>
-                <a class="button button-secondary" href="{% url 'categorymedicalrecords_disable' categorymedicalrecord.id %}">Disable</a>
-                <a class="button button-secondary" href="{% url 'categorymedicalrecords_delete' categorymedicalrecord.id %}">Delete</a>
+                <a class="button button-secondary" href="{% url 'categorymedicalrecords_update' categorymedicalrecord.id %}">Actualizar</a>
+                <a class="button button-secondary" href="{% url 'categorymedicalrecords_disable' categorymedicalrecord.id %}">Desactivar</a>
+                <a class="button button-secondary" href="{% url 'categorymedicalrecords_delete' categorymedicalrecord.id %}">Eliminar</a>
             </div>
         </article>
     {% empty %}
-        <p class="empty-message">No category medical records registered</p>
+        <p class="empty-message">No hay categorías registradas</p>
     {% endfor %}
 </div>
 
 <div class="pagination">
     {% if categorymedicalrecords.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ categorymedicalrecords.previous_page_number }}">Previous</a>
+        <a href="?page=1">Primera</a>
+        <a href="?page={{ categorymedicalrecords.previous_page_number }}">Anterior</a>
     {% endif %}
 
-    <span>Page {{ categorymedicalrecords.number }} of {{ categorymedicalrecords.paginator.num_pages }}</span>
+    <span>Página {{ categorymedicalrecords.number }} de {{ categorymedicalrecords.paginator.num_pages }}</span>
 
     {% if categorymedicalrecords.has_next %}
-        <a href="?page={{ categorymedicalrecords.next_page_number }}">Next</a>
-        <a href="?page={{ categorymedicalrecords.paginator.num_pages }}">Last</a>
+        <a href="?page={{ categorymedicalrecords.next_page_number }}">Siguiente</a>
+        <a href="?page={{ categorymedicalrecords.paginator.num_pages }}">Última</a>
     {% endif %}
 </div>
 {% endblock %}

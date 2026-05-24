@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Patient Record Detail{% endblock %}
+{% block title %}Detalle de Expediente{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,18 +20,18 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Patient Record Detail</h1>
+    <h1>Detalle de Expediente</h1>
 </section>
 
 {% if editing %}
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">Entry Date</label>
+            <label class="form-label">Fecha de Ingreso</label>
             <input type="date" name="entry_date" required value="{{ patientrecord.entry_date }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Patient</label>
+            <label class="form-label">Paciente</label>
             <select name="id_patient" required>
                 {% for patient in patients %}
                     <option value="{{ patient.id }}" {% if patientrecord.id_patient_id == patient.id %}selected{% endif %}>{{ patient.first_name }} {{ patient.first_lastname }}</option>
@@ -39,21 +39,21 @@
             </select>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'patientrecord' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <div class="panel-info">
-            <h2>General Information</h2>
+            <h2>Información General</h2>
             <p><strong>ID:</strong> {{ patientrecord.id }}</p>
-            <p><strong>Entry Date:</strong> {{ patientrecord.entry_date }}</p>
-            <p><strong>Patient:</strong> {{ patientrecord.id_patient }}</p>
+            <p><strong>Fecha de Ingreso:</strong> {{ patientrecord.entry_date }}</p>
+            <p><strong>Paciente:</strong> {{ patientrecord.id_patient }}</p>
         </div>
 
         <div class="panel-info" style="margin-top: 20px;">
-            <h2>Medical Records</h2>
+            <h2>Registros Médicos</h2>
             {% if patientrecord.medical_records.all %}
                 <ul style="margin-top: 10px; margin-left: 20px;">
                 {% for record in patientrecord.medical_records.all %}
@@ -64,33 +64,33 @@
                 {% endfor %}
                 </ul>
             {% else %}
-                <p>No medical records associated.</p>
+                <p>No hay registros médicos asociados.</p>
             {% endif %}
         </div>
 
         <div class="panel-info" style="margin-top: 20px;">
-            <h2>Medical Appointments</h2>
+            <h2>Citas Médicas</h2>
             {% if patientrecord.appointments.all %}
                 <ul style="margin-top: 10px; margin-left: 20px;">
                 {% for appointment in patientrecord.appointments.all %}
                     <li style="margin-bottom: 10px;">
                         <strong>{{ appointment.appointment_time }}</strong> - Dr. {{ appointment.id_doctor.first_name }} {{ appointment.id_doctor.first_lastname }}<br>
-                        <em>{{ appointment.type_id.name }} | Priority: {{ appointment.priority_id.name }}</em><br>
-                        Reason: {{ appointment.reason_appointment }}
+                        <em>{{ appointment.type_id.name }} | Prioridad: {{ appointment.priority_id.name }}</em><br>
+                        Motivo: {{ appointment.reason_appointment }}
                         {% if not appointment.active %}
-                            <br><span style="color: red;">(Cancelled)</span>
+                            <br><span style="color: red;">(Cancelada)</span>
                         {% endif %}
                     </li>
                 {% endfor %}
                 </ul>
             {% else %}
-                <p>No medical appointments associated.</p>
+                <p>No hay citas médicas asociadas.</p>
             {% endif %}
         </div>
 
         <div class="form-actions" style="margin-top: 20px;">
-            <a class="button button-primary" href="{% url 'patientrecords_update' patientrecord.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'patientrecord' %}">Back</a>
+            <a class="button button-primary" href="{% url 'patientrecords_update' patientrecord.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'patientrecord' %}">Volver</a>
         </div>
     </section>
 {% endif %}

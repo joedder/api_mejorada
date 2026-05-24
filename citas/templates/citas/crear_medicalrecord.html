@@ -20,13 +20,13 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Create Medical Record</h1>
+    <h1>Crear Registro Médico</h1>
 </section>
 
 <form class="panel-form" method="post">
     {% csrf_token %}
     <div class="form-field">
-        <label class="form-label">Category</label>
+        <label class="form-label">Categoría</label>
         <select name="category" required>
             <option value="">Select category</option>
             {% for category in categories %}
@@ -35,11 +35,11 @@
         </select>
     </div>
     <div class="form-field">
-        <label class="form-label">Name</label>
+        <label class="form-label">Nombre</label>
         <input type="text" name="name" maxlength="250" required placeholder="Name">
     </div>
     <div class="form-field">
-        <label class="form-label">Description</label>
+        <label class="form-label">Descripción</label>
         <textarea name="description" rows="5"></textarea>
     </div>
     <div class="form-field">
@@ -52,8 +52,8 @@
         </select>
     </div>
     <div class="form-actions">
-        <button class="button button-primary" type="submit">Save</button>
-        <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancel</a>
+        <button class="button button-primary" type="submit">Guardar</button>
+        <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancelar</a>
     </div>
 </form>
 {% endblock %}

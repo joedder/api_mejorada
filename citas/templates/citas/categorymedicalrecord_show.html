@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Category Medical Record Detail{% endblock %}
+{% block title %}Category Detalle de Registro Médico{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,33 +20,33 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Category Medical Record Detail</h1>
+    <h1>Category Detalle de Registro Médico</h1>
 </section>
 
 {% if editing %}
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">Name</label>
+            <label class="form-label">Nombre</label>
             <input type="text" name="name" maxlength="250" required value="{{ categorymedicalrecord.name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Description</label>
+            <label class="form-label">Descripción</label>
             <textarea name="description" rows="5">{{ categorymedicalrecord.description }}</textarea>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ categorymedicalrecord.id }}</p>
-        <p>Name: {{ categorymedicalrecord.name }}</p>
-        <p>Description: {{ categorymedicalrecord.description }}</p>
+        <p>Nombre: {{ categorymedicalrecord.name }}</p>
+        <p>Descripción: {{ categorymedicalrecord.description }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'categorymedicalrecords_update' categorymedicalrecord.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Back</a>
+            <a class="button button-primary" href="{% url 'categorymedicalrecords_update' categorymedicalrecord.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'categorymedicalrecord' %}">Volver</a>
         </div>
     </section>
 {% endif %}

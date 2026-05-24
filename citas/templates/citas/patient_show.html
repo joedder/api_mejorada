@@ -27,50 +27,50 @@
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">First Name</label>
+            <label class="form-label">Primer Nombre</label>
             <input type="text" name="first_name" maxlength="50" required value="{{ patient.first_name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Second Name</label>
+            <label class="form-label">Segundo Nombre</label>
             <input type="text" name="second_name" maxlength="50" value="{{ patient.second_name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">First Last Name</label>
+            <label class="form-label">Primer Apellido</label>
             <input type="text" name="first_lastname" maxlength="100" required value="{{ patient.first_lastname }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Second Last Name</label>
+            <label class="form-label">Segundo Apellido</label>
             <input type="text" name="second_lastname" maxlength="100" value="{{ patient.second_lastname }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Identity ID</label>
+            <label class="form-label">Cédula/ID</label>
             <input type="text" name="identity_id" maxlength="15" required value="{{ patient.identity_id }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Birth Date</label>
+            <label class="form-label">Fecha de Nacimiento</label>
             <input type="date" name="birth_date" required value="{{ patient.birth_date }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Gender</label>
+            <label class="form-label">Género</label>
             <select name="gender" required>
-                <option value="True" {% if patient.gender %}selected{% endif %}>Male</option>
-                <option value="False" {% if not patient.gender %}selected{% endif %}>Female</option>
+                <option value="True" {% if patient.gender %}selected{% endif %}>Masculino</option>
+                <option value="False" {% if not patient.gender %}selected{% endif %}>Femenino</option>
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Phone Number</label>
+            <label class="form-label">Número de Teléfono</label>
             <input type="text" name="phone_number" maxlength="15" required value="{{ patient.phone_number }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Mobile Number</label>
+            <label class="form-label">Número Celular</label>
             <input type="text" name="mobile_number" maxlength="15" required value="{{ patient.mobile_number }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Address</label>
+            <label class="form-label">Dirección</label>
             <textarea name="address" rows="3" required>{{ patient.address }}</textarea>
         </div>
         <div class="form-field">
-            <label class="form-label">Blood Group</label>
+            <label class="form-label">Grupo Sanguíneo</label>
             <input type="text" name="blood_group" maxlength="8" required value="{{ patient.blood_group }}">
         </div>
         <div class="form-field">
@@ -95,26 +95,26 @@
             </select>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'patient' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'patient' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ patient.id }}</p>
-        <p>Name: {{ patient.first_name }} {{ patient.first_lastname }}</p>
-        <p>Identity ID: {{ patient.identity_id }}</p>
-        <p>Birth Date: {{ patient.birth_date }}</p>
-        <p>Gender: {{ patient.gender|yesno:"Male,Female" }}</p>
+        <p>Nombre: {{ patient.first_name }} {{ patient.first_lastname }}</p>
+        <p>Cédula/ID: {{ patient.identity_id }}</p>
+        <p>Fecha de Nacimiento: {{ patient.birth_date }}</p>
+        <p>Género: {{ patient.gender|yesno:"Masculino,Femenino" }}</p>
         <p>Phone: {{ patient.phone_number }}</p>
         <p>Mobile: {{ patient.mobile_number }}</p>
-        <p>Blood Group: {{ patient.blood_group }}</p>
+        <p>Grupo Sanguíneo: {{ patient.blood_group }}</p>
         <p>Emergency Contact: {{ patient.name_emergency_contact }} {{ patient.last_name_emergency_contact }}</p>
         <p>Emergency Phone: {{ patient.phone_number_emergency_contact }}</p>
         <p>Patient Record: {{ patient.id_patient_record }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'patients_update' patient.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'patient' %}">Back</a>
+            <a class="button button-primary" href="{% url 'patients_update' patient.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'patient' %}">Volver</a>
         </div>
     </section>
 {% endif %}

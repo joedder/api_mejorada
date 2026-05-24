@@ -20,22 +20,22 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Create Priority Appointment</h1>
+    <h1>Crear Prioridad de Cita</h1>
 </section>
 
 <form class="panel-form" method="post">
     {% csrf_token %}
     <div class="form-field">
-        <label class="form-label">Name</label>
+        <label class="form-label">Nombre</label>
         <input type="text" name="name" maxlength="250" required placeholder="Name">
     </div>
     <div class="form-field">
-        <label class="form-label">Description</label>
+        <label class="form-label">Descripción</label>
         <textarea name="description" rows="5" placeholder="Description"></textarea>
     </div>
     <div class="form-actions">
-        <button class="button button-primary" type="submit">Save</button>
-        <a class="button button-secondary" href="{% url 'priorityappointment' %}">Cancel</a>
+        <button class="button button-primary" type="submit">Guardar</button>
+        <a class="button button-secondary" href="{% url 'priorityappointment' %}">Cancelar</a>
     </div>
 </form>
 {% endblock %}

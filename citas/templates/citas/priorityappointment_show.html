@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Priority Appointment Detail{% endblock %}
+{% block title %}Detalle de Prioridad de Cita{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,33 +20,33 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Priority Appointment Detail</h1>
+    <h1>Detalle de Prioridad de Cita</h1>
 </section>
 
 {% if editing %}
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">Name</label>
+            <label class="form-label">Nombre</label>
             <input type="text" name="name" maxlength="250" required value="{{ priorityappointment.name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Description</label>
+            <label class="form-label">Descripción</label>
             <textarea name="description" rows="5">{{ priorityappointment.description }}</textarea>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'priorityappointment' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'priorityappointment' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ priorityappointment.id }}</p>
-        <p>Name: {{ priorityappointment.name }}</p>
-        <p>Description: {{ priorityappointment.description }}</p>
+        <p>Nombre: {{ priorityappointment.name }}</p>
+        <p>Descripción: {{ priorityappointment.description }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'priorityappointments_update' priorityappointment.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'priorityappointment' %}">Back</a>
+            <a class="button button-primary" href="{% url 'priorityappointments_update' priorityappointment.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'priorityappointment' %}">Volver</a>
         </div>
     </section>
 {% endif %}

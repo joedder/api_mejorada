@@ -1,7 +1,7 @@
 {% extends 'citas/base.html' %}
 {% load static %}
 
-{% block title %}Medical Record Detail{% endblock %}
+{% block title %}Detalle de Registro Médico{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
@@ -20,14 +20,14 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Medical Record Detail</h1>
+    <h1>Detalle de Registro Médico</h1>
 </section>
 
 {% if editing %}
     <form class="panel-form" method="post">
         {% csrf_token %}
         <div class="form-field">
-            <label class="form-label">Category</label>
+            <label class="form-label">Categoría</label>
             <select name="category" required>
                 {% for category in categories %}
                     <option value="{{ category.id }}" {% if medicalrecord.category_id == category.id %}selected{% endif %}>{{ category.name }}</option>
@@ -35,11 +35,11 @@
             </select>
         </div>
         <div class="form-field">
-            <label class="form-label">Name</label>
+            <label class="form-label">Nombre</label>
             <input type="text" name="name" maxlength="250" required value="{{ medicalrecord.name }}">
         </div>
         <div class="form-field">
-            <label class="form-label">Description</label>
+            <label class="form-label">Descripción</label>
             <textarea name="description" rows="5">{{ medicalrecord.description }}</textarea>
         </div>
         <div class="form-field">
@@ -51,20 +51,20 @@
             </select>
         </div>
         <div class="form-actions">
-            <button class="button button-primary" type="submit">Save</button>
-            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancel</a>
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Cancelar</a>
         </div>
     </form>
 {% else %}
     <section class="show-panel">
         <p>ID: {{ medicalrecord.id }}</p>
-        <p>Category: {{ medicalrecord.category }}</p>
-        <p>Name: {{ medicalrecord.name }}</p>
-        <p>Description: {{ medicalrecord.description }}</p>
+        <p>Categoría: {{ medicalrecord.category }}</p>
+        <p>Nombre: {{ medicalrecord.name }}</p>
+        <p>Descripción: {{ medicalrecord.description }}</p>
         <p>Patient Record: {{ medicalrecord.id_patient_record }}</p>
         <div class="form-actions">
-            <a class="button button-primary" href="{% url 'medicalrecords_update' medicalrecord.id %}">Edit</a>
-            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Back</a>
+            <a class="button button-primary" href="{% url 'medicalrecords_update' medicalrecord.id %}">Editar</a>
+            <a class="button button-secondary" href="{% url 'medicalrecord' %}">Volver</a>
         </div>
     </section>
 {% endif %}
