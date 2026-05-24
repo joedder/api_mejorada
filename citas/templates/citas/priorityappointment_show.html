@@ -20,7 +20,10 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Detalle de Prioridad de Cita</h1>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <a href="{% url 'priorityappointment' %}" class="button button-secondary" title="Volver">⬅ Volver</a>
+        <h1 style="margin: 0;">Detalle de Prioridad de Cita</h1>
+    </div>
 </section>
 
 {% if editing %}

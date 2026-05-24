@@ -1,0 +1,76 @@
+{% extends 'citas/base.html' %}
+{% load static %}
+
+{% block title %}Registrarse | Clínica Azul{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'citas/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'citas/css/doctors.css' %}">
+{% endblock %}
+
+{% block notifications %}
+    {% if messages %}
+        <section class="flash-wrapper">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading" style="justify-content: center;">
+    <h1>Crear una Cuenta</h1>
+</section>
+
+<form class="panel-form" method="post" style="max-width: 600px; margin: 0 auto;">
+    {% csrf_token %}
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="form-field">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="name" maxlength="30" required placeholder="Ej: Juan">
+        </div>
+
+        <div class="form-field">
+            <label class="form-label">Apellidos</label>
+            <input type="text" name="last_name" maxlength="50" required placeholder="Ej: Pérez">
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label class="form-label">Nombre de Usuario</label>
+        <input type="text" name="username" maxlength="50" required placeholder="Usuario único">
+    </div>
+
+    <div class="form-field">
+        <label class="form-label">Correo Electrónico</label>
+        <input type="email" name="email" maxlength="200" required placeholder="correo@ejemplo.com">
+    </div>
+
+    <div class="form-field">
+        <label class="form-label">Número de Teléfono</label>
+        <input type="text" name="phone_number" maxlength="15" required placeholder="Ej: 04141234567">
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="form-field">
+            <label class="form-label">Contraseña</label>
+            <input type="password" name="password" required placeholder="Contraseña">
+        </div>
+
+        <div class="form-field">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input type="password" name="password_confirm" required placeholder="Repetir Contraseña">
+        </div>
+    </div>
+
+    <div class="form-actions" style="justify-content: center; margin-top: 20px;">
+        <button class="button button-primary" type="submit" style="width: 100%;">Registrarse</button>
+    </div>
+    
+    <div style="text-align: center; margin-top: 15px;">
+        <p style="color: #64748b;">¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: #0284c7; font-weight: bold; text-decoration: none;">Inicia sesión aquí</a></p>
+    </div>
+</form>
+{% endblock %}

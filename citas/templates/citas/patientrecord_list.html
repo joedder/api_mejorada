@@ -20,7 +20,10 @@
 
 {% block content %}
 <section class="page-heading">
-    <h1>Expedientes de Pacientes</h1>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <a href="{% url 'dashboard' %}" class="button button-secondary" title="Volver">⬅ Volver</a>
+        <h1 style="margin: 0;">Expedientes de Pacientes</h1>
+    </div>
     <a class="button button-primary" href="{% url 'patientrecords_create' %}">Crear Expediente</a>
 </section>
 

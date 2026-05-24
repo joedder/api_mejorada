@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from .models import User
 from .models import (
     Doctor,
     TypeAppointment,
@@ -15,8 +18,14 @@ from .models import (
 
 # Create your views here.
 
+@login_required(login_url='login')
 def create_doctor(request):
     if request.method == 'POST':
+        identity_id = request.POST.get('identity_id')
+        if Doctor.all_objects.filter(identity_id=identity_id).exists():
+            messages.error(request, f'El doctor con la cédula "{identity_id}" ya se encuentra registrado.')
+            return redirect('doctors_create')
+
         doctor = Doctor.objects.create(
             first_name=request.POST.get('first_name'),
             second_name=request.POST.get('second_name'),
@@ -33,6 +42,7 @@ def create_doctor(request):
     return render(request, 'citas/crear_doctor.html')
 
 
+@login_required(login_url='login')
 def doctor_list(request):
     doctors_list = Doctor.objects.all().order_by('id')
     paginator = Paginator(doctors_list, 10)
@@ -44,6 +54,7 @@ def doctor_list(request):
     })
 
 
+@login_required(login_url='login')
 def show_doctor(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
     return render(request, 'citas/doctor_show.html', {
@@ -52,6 +63,7 @@ def show_doctor(request, pk):
     })
 
 
+@login_required(login_url='login')
 def doctors_update(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
     if request.method == 'POST':
@@ -73,6 +85,7 @@ def doctors_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def doctors_disable(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
     doctor.soft_delete()
@@ -80,6 +93,7 @@ def doctors_disable(request, pk):
     return redirect('doctor')
 
 
+@login_required(login_url='login')
 def doctors_delete(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
     doctor.hard_delete()
@@ -87,6 +101,7 @@ def doctors_delete(request, pk):
     return redirect('doctor')
 
 
+@login_required(login_url='login')
 def create_typeappointment(request):
     if request.method == 'POST':
         typeappointment = TypeAppointment.objects.create(
@@ -99,6 +114,7 @@ def create_typeappointment(request):
     return render(request, 'citas/crear_typeappointment.html')
 
 
+@login_required(login_url='login')
 def typeappointment_list(request):
     typeappointments_list = TypeAppointment.objects.all().order_by('id')
     paginator = Paginator(typeappointments_list, 10)
@@ -110,6 +126,7 @@ def typeappointment_list(request):
     })
 
 
+@login_required(login_url='login')
 def typeappointment_show(request, pk):
     typeappointment = get_object_or_404(TypeAppointment, pk=pk)
     return render(request, 'citas/typeappointment_show.html', {
@@ -118,6 +135,7 @@ def typeappointment_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def typeappointments_update(request, pk):
     typeappointment = get_object_or_404(TypeAppointment, pk=pk)
     if request.method == 'POST':
@@ -133,6 +151,7 @@ def typeappointments_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def typeappointments_disable(request, pk):
     typeappointment = get_object_or_404(TypeAppointment, pk=pk)
     typeappointment.soft_delete()
@@ -140,6 +159,7 @@ def typeappointments_disable(request, pk):
     return redirect('typeappointment')
 
 
+@login_required(login_url='login')
 def typeappointments_delete(request, pk):
     typeappointment = get_object_or_404(TypeAppointment, pk=pk)
     typeappointment.hard_delete()
@@ -147,6 +167,7 @@ def typeappointments_delete(request, pk):
     return redirect('typeappointment')
 
 
+@login_required(login_url='login')
 def create_priorityappointment(request):
     if request.method == 'POST':
         priorityappointment = PriorityAppointment.objects.create(
@@ -159,6 +180,7 @@ def create_priorityappointment(request):
     return render(request, 'citas/crear_priorityappointment.html')
 
 
+@login_required(login_url='login')
 def priorityappointment_list(request):
     priorityappointments_list = PriorityAppointment.objects.all().order_by('id')
     paginator = Paginator(priorityappointments_list, 10)
@@ -170,6 +192,7 @@ def priorityappointment_list(request):
     })
 
 
+@login_required(login_url='login')
 def priorityappointment_show(request, pk):
     priorityappointment = get_object_or_404(PriorityAppointment, pk=pk)
     return render(request, 'citas/priorityappointment_show.html', {
@@ -178,6 +201,7 @@ def priorityappointment_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def priorityappointments_update(request, pk):
     priorityappointment = get_object_or_404(PriorityAppointment, pk=pk)
     if request.method == 'POST':
@@ -193,6 +217,7 @@ def priorityappointments_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def priorityappointments_disable(request, pk):
     priorityappointment = get_object_or_404(PriorityAppointment, pk=pk)
     priorityappointment.soft_delete()
@@ -200,6 +225,7 @@ def priorityappointments_disable(request, pk):
     return redirect('priorityappointment')
 
 
+@login_required(login_url='login')
 def priorityappointments_delete(request, pk):
     priorityappointment = get_object_or_404(PriorityAppointment, pk=pk)
     priorityappointment.hard_delete()
@@ -207,6 +233,7 @@ def priorityappointments_delete(request, pk):
     return redirect('priorityappointment')
 
 
+@login_required(login_url='login')
 def create_categorymedicalrecord(request):
     if request.method == 'POST':
         categorymedicalrecord = CategoryMedicalRecord.objects.create(
@@ -219,6 +246,7 @@ def create_categorymedicalrecord(request):
     return render(request, 'citas/crear_categorymedicalrecord.html')
 
 
+@login_required(login_url='login')
 def categorymedicalrecord_list(request):
     categorymedicalrecords_list = CategoryMedicalRecord.objects.all().order_by('id')
     paginator = Paginator(categorymedicalrecords_list, 10)
@@ -230,6 +258,7 @@ def categorymedicalrecord_list(request):
     })
 
 
+@login_required(login_url='login')
 def categorymedicalrecord_show(request, pk):
     categorymedicalrecord = get_object_or_404(CategoryMedicalRecord, pk=pk)
     return render(request, 'citas/categorymedicalrecord_show.html', {
@@ -238,6 +267,7 @@ def categorymedicalrecord_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def categorymedicalrecords_update(request, pk):
     categorymedicalrecord = get_object_or_404(CategoryMedicalRecord, pk=pk)
     if request.method == 'POST':
@@ -253,6 +283,7 @@ def categorymedicalrecords_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def categorymedicalrecords_disable(request, pk):
     categorymedicalrecord = get_object_or_404(CategoryMedicalRecord, pk=pk)
     categorymedicalrecord.soft_delete()
@@ -260,6 +291,7 @@ def categorymedicalrecords_disable(request, pk):
     return redirect('categorymedicalrecord')
 
 
+@login_required(login_url='login')
 def categorymedicalrecords_delete(request, pk):
     categorymedicalrecord = get_object_or_404(CategoryMedicalRecord, pk=pk)
     categorymedicalrecord.hard_delete()
@@ -267,6 +299,7 @@ def categorymedicalrecords_delete(request, pk):
     return redirect('categorymedicalrecord')
 
 
+@login_required(login_url='login')
 def create_patient(request):
     if request.method == 'POST':
         patient = Patient.objects.create(
@@ -295,6 +328,7 @@ def create_patient(request):
     })
 
 
+@login_required(login_url='login')
 def patient_list(request):
     patients_list = Patient.objects.all().order_by('id')
     paginator = Paginator(patients_list, 10)
@@ -306,6 +340,7 @@ def patient_list(request):
     })
 
 
+@login_required(login_url='login')
 def patient_show(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     return render(request, 'citas/patient_show.html', {
@@ -314,6 +349,7 @@ def patient_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def patients_update(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     if request.method == 'POST':
@@ -344,6 +380,7 @@ def patients_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def patients_disable(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     patient.soft_delete()
@@ -351,6 +388,7 @@ def patients_disable(request, pk):
     return redirect('patient')
 
 
+@login_required(login_url='login')
 def patients_delete(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     patient.hard_delete()
@@ -358,6 +396,7 @@ def patients_delete(request, pk):
     return redirect('patient')
 
 
+@login_required(login_url='login')
 def create_patientrecord(request):
     if request.method == 'POST':
         patientrecord = PatientRecord.objects.create(
@@ -373,6 +412,7 @@ def create_patientrecord(request):
     })
 
 
+@login_required(login_url='login')
 def patientrecord_list(request):
     patientrecords_list = PatientRecord.objects.all().order_by('id')
     paginator = Paginator(patientrecords_list, 10)
@@ -384,6 +424,7 @@ def patientrecord_list(request):
     })
 
 
+@login_required(login_url='login')
 def patientrecord_show(request, pk):
     patientrecord = get_object_or_404(PatientRecord, pk=pk)
     return render(request, 'citas/patientrecord_show.html', {
@@ -392,6 +433,7 @@ def patientrecord_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def patientrecords_update(request, pk):
     patientrecord = get_object_or_404(PatientRecord, pk=pk)
     if request.method == 'POST':
@@ -409,6 +451,7 @@ def patientrecords_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def patientrecords_disable(request, pk):
     patientrecord = get_object_or_404(PatientRecord, pk=pk)
     patientrecord.soft_delete()
@@ -416,6 +459,7 @@ def patientrecords_disable(request, pk):
     return redirect('patientrecord')
 
 
+@login_required(login_url='login')
 def patientrecords_delete(request, pk):
     patientrecord = get_object_or_404(PatientRecord, pk=pk)
     patientrecord.hard_delete()
@@ -423,6 +467,7 @@ def patientrecords_delete(request, pk):
     return redirect('patientrecord')
 
 
+@login_required(login_url='login')
 def create_medicalappointment(request):
     if request.method == 'POST':
         cancellation_date = request.POST.get('cancellation_date') or None
@@ -462,6 +507,7 @@ def create_medicalappointment(request):
     })
 
 
+@login_required(login_url='login')
 def medicalappointment_list(request):
     medicalappointments_list = MedicalAppointment.objects.all().order_by('id')
     paginator = Paginator(medicalappointments_list, 10)
@@ -473,6 +519,7 @@ def medicalappointment_list(request):
     })
 
 
+@login_required(login_url='login')
 def medicalappointment_show(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     return render(request, 'citas/medicalappointment_show.html', {
@@ -481,6 +528,7 @@ def medicalappointment_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def medicalappointments_update(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     if request.method == 'POST':
@@ -495,7 +543,13 @@ def medicalappointments_update(request, pk):
         medicalappointment.patient_record_id = request.POST.get('patient_record')
         medicalappointment.patient_comments = request.POST.get('patient_comments')
         
-        if medicalappointment.cancellation_date:
+        if medicalappointment.rescheduled_date:
+            medicalappointment.appointment_time = medicalappointment.rescheduled_date
+            medicalappointment.cancellation_date = None
+            medicalappointment.reason_for_cancellation = None
+            medicalappointment.rescheduled_date = None
+            medicalappointment.active = True
+        elif medicalappointment.cancellation_date:
             medicalappointment.active = False
         else:
             active_val = request.POST.get('active')
@@ -522,6 +576,7 @@ def medicalappointments_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def medicalappointments_disable(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     medicalappointment.soft_delete()
@@ -529,6 +584,7 @@ def medicalappointments_disable(request, pk):
     return redirect('medicalappointment')
 
 
+@login_required(login_url='login')
 def medicalappointments_delete(request, pk):
     medicalappointment = get_object_or_404(MedicalAppointment, pk=pk)
     medicalappointment.hard_delete()
@@ -536,6 +592,7 @@ def medicalappointments_delete(request, pk):
     return redirect('medicalappointment')
 
 
+@login_required(login_url='login')
 def create_medicalrecord(request):
     if request.method == 'POST':
         medicalrecord = MedicalRecord.objects.create(
@@ -555,6 +612,7 @@ def create_medicalrecord(request):
     })
 
 
+@login_required(login_url='login')
 def medicalrecord_list(request):
     medicalrecords_list = MedicalRecord.objects.all().order_by('id')
     paginator = Paginator(medicalrecords_list, 10)
@@ -566,6 +624,7 @@ def medicalrecord_list(request):
     })
 
 
+@login_required(login_url='login')
 def medicalrecord_show(request, pk):
     medicalrecord = get_object_or_404(MedicalRecord, pk=pk)
     return render(request, 'citas/medicalrecord_show.html', {
@@ -574,6 +633,7 @@ def medicalrecord_show(request, pk):
     })
 
 
+@login_required(login_url='login')
 def medicalrecords_update(request, pk):
     medicalrecord = get_object_or_404(MedicalRecord, pk=pk)
     if request.method == 'POST':
@@ -595,6 +655,7 @@ def medicalrecords_update(request, pk):
     })
 
 
+@login_required(login_url='login')
 def medicalrecords_disable(request, pk):
     medicalrecord = get_object_or_404(MedicalRecord, pk=pk)
     medicalrecord.soft_delete()
@@ -602,6 +663,7 @@ def medicalrecords_disable(request, pk):
     return redirect('medicalrecord')
 
 
+@login_required(login_url='login')
 def medicalrecords_delete(request, pk):
     medicalrecord = get_object_or_404(MedicalRecord, pk=pk)
     medicalrecord.hard_delete()
@@ -609,9 +671,11 @@ def medicalrecords_delete(request, pk):
     return redirect('medicalrecord')
 
 
+@login_required(login_url='login')
 def hello_world(request):
     return HttpResponse("<h1>Hola Mundo<h1>")
 
+@login_required(login_url='login')
 def dashboard(request):
     modules = [
         {
@@ -663,4 +727,65 @@ def dashboard(request):
             'description': 'Niveles de prioridad'
         },
     ]
-    return render(request, 'citas/dashboard.html', {'modules': modules})
+    return render(request, 'citas/dashboard.html', {'modules': modules})
+
+
+# ==========================================
+# AUTH VIEWS
+# ==========================================
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password  = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+    return render(request, 'citas/login.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
+
+        if password != password_confirm:
+            messages.error(request, 'Las contraseñas no coinciden.')
+            return redirect('register')
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'El nombre de usuario ya está en uso.')
+            return redirect('register')
+            
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'El correo electrónico ya está en uso.')
+            return redirect('register')
+
+        try:
+            # Our custom UserManager uses create_user
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                name=name,
+                last_name=last_name,
+                phone_number=phone_number
+            )
+            messages.success(request, 'Cuenta creada exitosamente. Inicia sesión para continuar.')
+            return redirect('login')
+        except Exception as e:
+            messages.error(request, f'Ocurrió un error al registrarse: {str(e)}')
+            return redirect('register')
+
+    return render(request, 'citas/register.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
