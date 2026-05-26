@@ -26,31 +26,31 @@
     </div>
 </section>
 
-<form class="panel-form" method="post">
+<form class="panel-form" method="post" autocomplete="off">
     {% csrf_token %}
     <div class="form-field">
         <label class="form-label">Primer Nombre</label>
-        <input type="text" name="first_name" maxlength="50" required placeholder="First name">
+        <input type="text" name="first_name" maxlength="50" required placeholder="First name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Segundo Nombre</label>
-        <input type="text" name="second_name" maxlength="50" placeholder="Second name">
+        <input type="text" name="second_name" maxlength="50" placeholder="Second name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Primer Apellido</label>
-        <input type="text" name="first_lastname" maxlength="100" required placeholder="First last name">
+        <input type="text" name="first_lastname" maxlength="100" required placeholder="First last name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Segundo Apellido</label>
-        <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name">
+        <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Cédula/ID</label>
-        <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID">
+        <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Fecha de Nacimiento</label>
-        <input type="date" name="birth_date" required>
+        <input type="date" name="birth_date" required autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Género</label>
@@ -62,31 +62,31 @@
     </div>
     <div class="form-field">
         <label class="form-label">Número de Teléfono</label>
-        <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number">
+        <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Número Celular</label>
-        <input type="text" name="mobile_number" maxlength="15" required placeholder="Mobile number">
+        <input type="text" name="mobile_number" maxlength="15" required placeholder="Mobile number" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Dirección</label>
-        <textarea name="address" rows="3" required placeholder="Address"></textarea>
+        <textarea name="address" rows="3" required placeholder="Address" autocomplete="off"></textarea>
     </div>
     <div class="form-field">
         <label class="form-label">Grupo Sanguíneo</label>
-        <input type="text" name="blood_group" maxlength="8" required placeholder="Blood group">
+        <input type="text" name="blood_group" maxlength="8" required placeholder="Blood group" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Emergency Contact First Name</label>
-        <input type="text" name="name_emergency_contact" maxlength="100" placeholder="Emergency contact first name">
+        <input type="text" name="name_emergency_contact" maxlength="100" placeholder="Emergency contact first name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Emergency Contact Last Name</label>
-        <input type="text" name="last_name_emergency_contact" maxlength="100" placeholder="Emergency contact last name">
+        <input type="text" name="last_name_emergency_contact" maxlength="100" placeholder="Emergency contact last name" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Emergency Contact Phone</label>
-        <input type="text" name="phone_number_emergency_contact" maxlength="15" placeholder="Emergency contact phone">
+        <input type="text" name="phone_number_emergency_contact" maxlength="15" placeholder="Emergency contact phone" autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Patient Record</label>

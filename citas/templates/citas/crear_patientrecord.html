@@ -26,11 +26,11 @@
     </div>
 </section>
 
-<form class="panel-form" method="post">
+<form class="panel-form" method="post" autocomplete="off">
     {% csrf_token %}
     <div class="form-field">
         <label class="form-label">Fecha de Ingreso</label>
-        <input type="date" name="entry_date" required>
+        <input type="date" name="entry_date" required autocomplete="off">
     </div>
     <div class="form-field">
         <label class="form-label">Paciente</label>

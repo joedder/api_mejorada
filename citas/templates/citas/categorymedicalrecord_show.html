@@ -27,11 +27,11 @@
 </section>
 
 {% if editing %}
-    <form class="panel-form" method="post">
+    <form class="panel-form" method="post" autocomplete="off">
         {% csrf_token %}
         <div class="form-field">
             <label class="form-label">Nombre</label>
-            <input type="text" name="name" maxlength="250" required value="{{ categorymedicalrecord.name }}">
+            <input type="text" name="name" maxlength="250" required value="{{ categorymedicalrecord.name }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Descripción</label>

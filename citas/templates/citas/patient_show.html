@@ -27,31 +27,31 @@
 </section>
 
 {% if editing %}
-    <form class="panel-form" method="post">
+    <form class="panel-form" method="post" autocomplete="off">
         {% csrf_token %}
         <div class="form-field">
             <label class="form-label">Primer Nombre</label>
-            <input type="text" name="first_name" maxlength="50" required value="{{ patient.first_name }}">
+            <input type="text" name="first_name" maxlength="50" required value="{{ patient.first_name }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Segundo Nombre</label>
-            <input type="text" name="second_name" maxlength="50" value="{{ patient.second_name }}">
+            <input type="text" name="second_name" maxlength="50" value="{{ patient.second_name }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Primer Apellido</label>
-            <input type="text" name="first_lastname" maxlength="100" required value="{{ patient.first_lastname }}">
+            <input type="text" name="first_lastname" maxlength="100" required value="{{ patient.first_lastname }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Segundo Apellido</label>
-            <input type="text" name="second_lastname" maxlength="100" value="{{ patient.second_lastname }}">
+            <input type="text" name="second_lastname" maxlength="100" value="{{ patient.second_lastname }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Cédula/ID</label>
-            <input type="text" name="identity_id" maxlength="15" required value="{{ patient.identity_id }}">
+            <input type="text" name="identity_id" maxlength="15" required value="{{ patient.identity_id }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Fecha de Nacimiento</label>
-            <input type="date" name="birth_date" required value="{{ patient.birth_date }}">
+            <input type="date" name="birth_date" required value="{{ patient.birth_date }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Género</label>
@@ -62,31 +62,31 @@
         </div>
         <div class="form-field">
             <label class="form-label">Número de Teléfono</label>
-            <input type="text" name="phone_number" maxlength="15" required value="{{ patient.phone_number }}">
+            <input type="text" name="phone_number" maxlength="15" required value="{{ patient.phone_number }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Número Celular</label>
-            <input type="text" name="mobile_number" maxlength="15" required value="{{ patient.mobile_number }}">
+            <input type="text" name="mobile_number" maxlength="15" required value="{{ patient.mobile_number }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Dirección</label>
-            <textarea name="address" rows="3" required>{{ patient.address }}</textarea>
+            <textarea name="address" rows="3" required autocomplete="off">{{ patient.address }}</textarea>
         </div>
         <div class="form-field">
             <label class="form-label">Grupo Sanguíneo</label>
-            <input type="text" name="blood_group" maxlength="8" required value="{{ patient.blood_group }}">
+            <input type="text" name="blood_group" maxlength="8" required value="{{ patient.blood_group }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Emergency Contact First Name</label>
-            <input type="text" name="name_emergency_contact" maxlength="100" value="{{ patient.name_emergency_contact }}">
+            <input type="text" name="name_emergency_contact" maxlength="100" value="{{ patient.name_emergency_contact }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Emergency Contact Last Name</label>
-            <input type="text" name="last_name_emergency_contact" maxlength="100" value="{{ patient.last_name_emergency_contact }}">
+            <input type="text" name="last_name_emergency_contact" maxlength="100" value="{{ patient.last_name_emergency_contact }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Emergency Contact Phone</label>
-            <input type="text" name="phone_number_emergency_contact" maxlength="15" value="{{ patient.phone_number_emergency_contact }}">
+            <input type="text" name="phone_number_emergency_contact" maxlength="15" value="{{ patient.phone_number_emergency_contact }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Patient Record</label>

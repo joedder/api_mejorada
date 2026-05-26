@@ -26,32 +26,32 @@
     </div>
 </section>
 
-<form class="panel-form" method="post">
+<form class="panel-form" method="post" autocomplete="off">
     {% csrf_token %}
 
     <div class="form-field">
         <label class="form-label">Primer Nombre</label>
-        <input type="text" name="first_name" maxlength="50" required placeholder="First name">
+        <input type="text" name="first_name" maxlength="50" required placeholder="First name" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Segundo Nombre</label>
-        <input type="text" name="second_name" maxlength="50" placeholder="Second name">
+        <input type="text" name="second_name" maxlength="50" placeholder="Second name" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Last Name</label>
-        <input type="text" name="first_lastname" maxlength="100" required placeholder="Last name">
+        <input type="text" name="first_lastname" maxlength="100" required placeholder="Last name" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Segundo Apellido</label>
-        <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name">
+        <input type="text" name="second_lastname" maxlength="100" placeholder="Second last name" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Cédula/ID</label>
-        <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID">
+        <input type="text" name="identity_id" maxlength="15" required placeholder="Identity ID" autocomplete="off">
     </div>
 
     <div class="form-field">
@@ -65,12 +65,12 @@
 
     <div class="form-field">
         <label class="form-label">Número de Teléfono</label>
-        <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number">
+        <input type="text" name="phone_number" maxlength="15" required placeholder="Phone number" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Especialidad</label>
-        <input type="text" name="specialty" required placeholder="Specialty">
+        <input type="text" name="specialty" required placeholder="Specialty" autocomplete="off">
     </div>
 
     <div class="form-actions">

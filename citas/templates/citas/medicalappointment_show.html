@@ -27,7 +27,7 @@
 </section>
 
 {% if editing %}
-    <form class="panel-form" method="post">
+    <form class="panel-form" method="post" autocomplete="off">
         {% csrf_token %}
         <div class="form-field">
             <label class="form-label">Doctor</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="form-field">
             <label class="form-label">Hora de Cita</label>
-            <input type="datetime-local" name="appointment_time" required value="{{ medicalappointment.appointment_time|date:'Y-m-d\TH:i' }}">
+            <input type="datetime-local" name="appointment_time" required value="{{ medicalappointment.appointment_time|date:'Y-m-d\TH:i' }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Reason</label>
@@ -63,7 +63,7 @@
         </div>
         <div class="form-field">
             <label class="form-label">Fecha de Cancelación</label>
-            <input type="datetime-local" name="cancellation_date" value="{{ medicalappointment.cancellation_date|date:'Y-m-d\TH:i' }}">
+            <input type="datetime-local" name="cancellation_date" value="{{ medicalappointment.cancellation_date|date:'Y-m-d\TH:i' }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Reason for Cancellation</label>
@@ -71,7 +71,7 @@
         </div>
         <div class="form-field">
             <label class="form-label">Fecha Reprogramada</label>
-            <input type="datetime-local" name="rescheduled_date" value="{{ medicalappointment.rescheduled_date|date:'Y-m-d\TH:i' }}">
+            <input type="datetime-local" name="rescheduled_date" value="{{ medicalappointment.rescheduled_date|date:'Y-m-d\TH:i' }}" autocomplete="off">
         </div>
         <div class="form-field">
             <label class="form-label">Patient Record</label>
