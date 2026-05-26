@@ -23,45 +23,45 @@
     <h1>Crear una Cuenta</h1>
 </section>
 
-<form class="panel-form" method="post" style="max-width: 600px; margin: 0 auto;">
+<form class="panel-form" method="post" style="max-width: 600px; margin: 0 auto;" autocomplete="off">
     {% csrf_token %}
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
         <div class="form-field">
             <label class="form-label">Nombre</label>
-            <input type="text" name="name" maxlength="30" required placeholder="Ej: Juan">
+            <input type="text" name="name" maxlength="30" required placeholder="Ej: Juan" autocomplete="off">
         </div>
 
         <div class="form-field">
             <label class="form-label">Apellidos</label>
-            <input type="text" name="last_name" maxlength="50" required placeholder="Ej: Pérez">
+            <input type="text" name="last_name" maxlength="50" required placeholder="Ej: Pérez" autocomplete="off">
         </div>
     </div>
 
     <div class="form-field">
         <label class="form-label">Nombre de Usuario</label>
-        <input type="text" name="username" maxlength="50" required placeholder="Usuario único">
+        <input type="text" name="username" maxlength="50" required placeholder="Usuario único" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Correo Electrónico</label>
-        <input type="email" name="email" maxlength="200" required placeholder="correo@ejemplo.com">
+        <input type="email" name="email" maxlength="200" required placeholder="correo@ejemplo.com" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Número de Teléfono</label>
-        <input type="text" name="phone_number" maxlength="15" required placeholder="Ej: 04141234567">
+        <input type="text" name="phone_number" maxlength="15" required placeholder="Ej: 04141234567" autocomplete="off">
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
         <div class="form-field">
             <label class="form-label">Contraseña</label>
-            <input type="password" name="password" required placeholder="Contraseña">
+            <input type="password" name="password" required placeholder="Contraseña" autocomplete="new-password">
         </div>
 
         <div class="form-field">
             <label class="form-label">Confirmar Contraseña</label>
-            <input type="password" name="password_confirm" required placeholder="Repetir Contraseña">
+            <input type="password" name="password_confirm" required placeholder="Repetir Contraseña" autocomplete="new-password">
         </div>
     </div>
 

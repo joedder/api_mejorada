@@ -23,17 +23,17 @@
     <h1>Iniciar Sesión</h1>
 </section>
 
-<form class="panel-form" method="post" style="max-width: 400px; margin: 0 auto;">
+<form class="panel-form" method="post" style="max-width: 400px; margin: 0 auto;" autocomplete="off">
     {% csrf_token %}
 
     <div class="form-field">
         <label class="form-label">Nombre de Usuario</label>
-        <input type="text" name="username" required placeholder="Usuario">
+        <input type="text" name="username" required placeholder="Usuario" autocomplete="off">
     </div>
 
     <div class="form-field">
         <label class="form-label">Contraseña</label>
-        <input type="password" name="password" required placeholder="Contraseña">
+        <input type="password" name="password" required placeholder="Contraseña" autocomplete="off">
     </div>
 
     <div class="form-actions" style="justify-content: center; margin-top: 20px;">
